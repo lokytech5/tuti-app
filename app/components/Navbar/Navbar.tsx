@@ -4,6 +4,7 @@ import UserMenu from './UserMenu'
 import HamburgerMenu from './HamburgerMenu'
 import DesktopMenu from './DesktopMenu'
 import Cart from './Cart'
+import Link from 'next/link'
 
 const Navbar = () => {
   return (
@@ -15,7 +16,7 @@ const Navbar = () => {
       <HamburgerMenu/>
   </div>
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl">tutiHairs</a>
+    <Link href="/home" className="btn btn-ghost normal-case text-xl">tutiHairs</Link>
   </div>
        <DesktopMenu/>
     <div className="flex-none">
