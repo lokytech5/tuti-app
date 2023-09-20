@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './components/Navbar/Navbar'
+import InitializeTheme from './components/Navbar/InitializeTheme'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,8 +16,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+   
   return (
     <html lang="en" data-theme="fantasy">
+      <InitializeTheme/>
       <body className={inter.className}>
       <Navbar/>
       <main className='p-2'>{children}</main> 
