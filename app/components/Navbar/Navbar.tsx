@@ -14,7 +14,7 @@ const Navbar = () => {
   <div className='drawer'> 
   <input id="my-drawer-3" type="checkbox" className="drawer-toggle" /> 
   <div className="drawer-content flex flex-col">
-    <div className="navbar bg-primary">
+    <div className="navbar bg-neutral">
     <div className="flex-none lg:hidden">
       <HamburgerMenu/>
   </div>
