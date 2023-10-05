@@ -6,6 +6,7 @@ import CuratedCollection from './CuratedCollection'
 import Hero from './Hero'
 import AOS from 'aos'
 import 'aos/dist/aos.css';
+import LatestProduct from './LatestProduct'
 
 const HomePage = () => {
   useEffect(() => {
@@ -29,9 +30,13 @@ const HomePage = () => {
   <CuratedCollection/>
 </div>
 
+<div>
+  <LatestProduct/>
+</div>
+
 <div data-aos="slide-up" data-aos-delay="400">
   <ProductDescription/>
-</div>
+  </div>
       <Footer/>
         </div>
   )
