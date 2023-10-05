@@ -30,7 +30,7 @@ const HomePage = () => {
   <CuratedCollection/>
 </div>
 
-<div>
+<div data-aos="fade-in" data-aos-delay="300">
   <LatestProduct/>
 </div>
 

@@ -34,7 +34,9 @@ const LatestProduct = () => {
 
  <div className="flex flex-wrap justify-center gap-10">
  {latestProducts.map((product, index) => (
-            <ProductCard id={0} 
+            <ProductCard
+            key={index} 
+            id={0} 
             name={product.title} 
             description={product.description} 
             image={product.image}
