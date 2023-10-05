@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import ProductCard from '../components/ProductCard'
 const CuratedCollection = () => {
     const products = [
         {
@@ -30,15 +31,7 @@ const CuratedCollection = () => {
 
  <div className="flex flex-wrap justify-center gap-10">
           {products.map((product, index) => (
-          <div key={index} className="card card-compact w-64 bg-netural-100 shadow-2xl">
-              <div className="card-body"> {/* Added margin-bottom for spacing */}
-                <h2 className="card-title">{product.title}</h2> {/* Added margin-bottom for spacing */}
-                <p>{product.description}</p>
-              </div>
-              <figure>
-                <Image src={product.image} alt={product.title} width={284} height={156} layout="responsive" />
-              </figure>
-            </div>
+            <ProductCard id={0} name={product.title} description={product.description} image={product.image} />
           ))}
         </div>
 
