@@ -31,7 +31,7 @@ const CuratedCollection = () => {
 
  <div className="flex flex-wrap justify-center gap-10">
           {products.map((product, index) => (
-            <ProductCard id={0} name={product.title} description={product.description} image={product.image} />
+            <ProductCard id={0} name={product.title} image={product.image}/>
           ))}
         </div>
 

@@ -6,26 +6,30 @@ const LatestProduct = () => {
         {
             title: 'Shoes!',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair1.jpg'
+      image: '/images/hair1.jpg',
+      price: 10_000
         },
         {
             title: 'Shoes!',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg'
+      image: '/images/hair3.jpg',
+      price: 10_000
         },
         {
             title: 'Shoes!',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg'
+      image: '/images/hair3.jpg',
+      price: 10_000
         },
         {
             title: 'Shoes!',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg'
+      image: '/images/hair3.jpg',
+      price: 10_000
         }
     ]
   return (
-    <section className="p-8 bg-base text-base-content">
+    <section className="p-8 bg-netural text-base-content">
  <h1 className="text-5xl font-bold mb-6 text-center">Latest Products</h1>
 
  <div className="flex flex-wrap justify-center gap-10">
@@ -35,7 +39,8 @@ const LatestProduct = () => {
             description={product.description} 
             image={product.image}
             showDetailsButton={true}
-             showAddToCartButton={true} />
+             showAddToCartButton={true}
+             price={product.price} />
           ))}
 
  </div>
