@@ -1,25 +1,25 @@
 import React from 'react'
 import Image from 'next/image'
-import ProductCard from '../components/ProductCard'
+import CuratedProductCard from './CuratedProductCard'
 const CuratedCollection = () => {
     const products = [
         {
-            title: 'Shoes!',
+            title: 'Kinky Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
       image: '/images/hair1.jpg'
         },
         {
-            title: 'Shoes!',
+            title: 'Curly Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
       image: '/images/hair3.jpg'
         },
         {
-            title: 'Shoes!',
+            title: 'Kinky Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
       image: '/images/hair3.jpg'
         },
         {
-            title: 'Shoes!',
+            title: 'Curly Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
       image: '/images/hair3.jpg'
         }
@@ -31,7 +31,7 @@ const CuratedCollection = () => {
 
  <div className="flex flex-wrap justify-center gap-10">
           {products.map((product, index) => (
-            <ProductCard id={0} name={product.title} image={product.image}/>
+            <CuratedProductCard id={0} name={product.title} image={product.image}/>
           ))}
         </div>
 
