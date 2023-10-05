@@ -20,7 +20,6 @@ const HomePage = () => {
   return (
     <div>
 
-   
     
 <div data-aos="fade-up">
   <Hero/>
