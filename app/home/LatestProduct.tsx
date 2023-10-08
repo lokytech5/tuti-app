@@ -6,7 +6,37 @@ const LatestProduct = () => {
         {
             title: 'Kinky Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair1.jpg',
+      image: '/images/hairs4.jpeg',
+      price: 10_000
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/hairs7.jpeg',
+      price: 10_000
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated2.jpeg',
+      price: 10_000
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated4.jpeg',
+      price: 10_000
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated5.jpeg',
+      price: 10_000
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated2.jpeg',
       price: 10_000
         },
         {

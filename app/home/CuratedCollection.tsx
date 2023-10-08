@@ -6,17 +6,32 @@ const CuratedCollection = () => {
         {
             title: 'Kinky Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair1.jpg'
-        },
-        {
-            title: 'Curly Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg'
+      image: '/images/curated1.jpeg'
         },
         {
             title: 'Kinky Hair',
       description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg'
+      image: '/images/curated2.jpeg'
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated3.jpeg'
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated4.jpeg'
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated5.jpeg'
+        },
+        {
+            title: 'Kinky Hair',
+      description: 'If a dog chews shoes whose shoes does he choose?',
+      image: '/images/curated6.jpeg'
         },
         {
             title: 'Curly Hair',
