@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import useProducts from '../hooks/useProducts';
 import ErrorAlert from '../components/ErrorAlert';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Footer from '../components/Footer';
 
 
 const ProductPage = () => {
@@ -23,6 +24,7 @@ const { data, error, isLoading } = useProducts();
 
   
   return (
+    <>
     <div className="min-h-screen bg-gray-100">
       <div className="bg-cover h-96 flex md:bg-center" style={{ backgroundImage: `url('/images/background2.jpg')` }}></div>
      
@@ -49,7 +51,8 @@ const { data, error, isLoading } = useProducts();
       </div>
     </div>
 
- 
+    <Footer/>
+    </>
   )
 }
 
