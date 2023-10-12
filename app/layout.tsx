@@ -20,15 +20,15 @@ export default function RootLayout({
    
   return (
     <html lang="en" data-theme="fantasy">
-      <Providers>
         
       <InitializeTheme/>
       <body className={inter.className}>
+      <Providers>
       <Navbar/>
       <main>{children}</main> 
+      </Providers>
       </body>
       
-      </Providers>
     </html>
   )
 }

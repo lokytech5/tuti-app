@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { FaShoppingCart, FaEye, FaSearchPlus  } from 'react-icons/fa';
 
 interface ProductCardProps {
-    id:number;
+    id:number | string;
     name: string;
     description: string;
     price: number;
