@@ -24,12 +24,12 @@ export interface Product {
   }
 
 export interface ProductResponse {
-    product?: Product[];       // Make this optional with "?"
+    product: Product[];       // Make this optional with "?"
     latestProducts?: Product[];// Add this new field and make it optional
     totalPages: number;
   }
 
-  export interface LatestProductResponse {
+export interface LatestProductResponse {
     latestProducts: Product[];
     totalPages: number;
 }
