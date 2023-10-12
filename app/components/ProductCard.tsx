@@ -27,14 +27,14 @@ const ProductCard = (product: ProductCardProps) => {
                 <p className="text-sm">{product.description}</p>
             </div>
     
-            <div className="flex justify-center items-center p-4">
+            <div className="flex justify-center items-center p-4 space-x-4 w-full">
                 {product.showDetailsButton ? (
                     <div className="flex justify-between items-center w-full">
-                        <button className="btn btn-primary">Details</button>
+                        <button className="btn btn-primary w-1/2">Details</button>
                         {product.showAddToCartButton &&
-                            <button className="btn btn-secondary text-neutral-100 hover:bg-red-500 transition-colors duration-300">
-                                Add to cart
-                                <FaShoppingCart className="mr-2" size={15} />
+                            <button className="btn btn-accent rounded-full w-1/6 text-neutral-100 hover:bg-red-500 transition-colors duration-300 p-2 group">
+                                
+                                <FaShoppingCart className="group-hover:text-white"  size={20} />
                             </button>
                         }
                     </div>
