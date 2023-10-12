@@ -1,21 +1,13 @@
 "use client"
-import React from 'react'
-import ProductCard from '../components/ProductCard';
-import FilterProduct from './FilterProduct';
-import apiClient from '../components/services/api-client';
-import { useQuery } from '@tanstack/react-query';
-import useProducts from '../hooks/useProducts';
 import ErrorAlert from '../components/ErrorAlert';
-import LoadingSpinner from '../components/LoadingSpinner';
 import Footer from '../components/Footer';
+import LoadingSpinner from '../components/LoadingSpinner';
+import ProductCard from '../components/ProductCard';
+import useProducts from '../hooks/useProducts';
+import FilterProduct from './FilterProduct';
 
 
 const ProductPage = () => {
-
-  const fetchProducts = () => 
-  apiClient
-      .get('/products')
-      .then(res => res.data);
 
 const { data, error, isLoading } = useProducts();
 

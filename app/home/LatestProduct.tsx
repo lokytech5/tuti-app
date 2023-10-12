@@ -1,73 +1,24 @@
 import React from 'react'
 import ProductCard from '../components/ProductCard'
+import LoadingSpinner from '../components/LoadingSpinner';
+import ErrorAlert from '../components/ErrorAlert';
+import useProducts from '../hooks/useProducts';
 
 const LatestProduct = () => {
-    const latestProducts = [
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hairs4.jpeg',
-      price: 10_000
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hairs7.jpeg',
-      price: 10_000
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated2.jpeg',
-      price: 10_000
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated4.jpeg',
-      price: 10_000
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated5.jpeg',
-      price: 10_000
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated2.jpeg',
-      price: 10_000
-        },
-        {
-            title: 'Curly Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg',
-      price: 10_000
-        },
-        {
-            title: 'Black Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg',
-      price: 10_000
-        },
-        {
-            title: 'Short Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg',
-      price: 10_000
-        }
-    ]
+  const { data, error, isLoading } = useProducts();
+
+  if(isLoading) return <LoadingSpinner/>
+  if(error) return <ErrorAlert message={error.message}/>
   return (
     <section className="p-8 bg-netural text-base-content">
  <h1 className="text-5xl font-bold mb-6 text-center">Latest Products</h1>
 
  <div className="flex flex-wrap justify-center gap-10">
- {latestProducts.map((product, index) => (
+ {data?.product.map((product, index) => (
             <ProductCard
             key={index} 
-            id={0} 
-            name={product.title} 
+            id={product._id} 
+            name={product.name} 
             description={product.description} 
             image={product.image}
              showAddToCartButton={true}
