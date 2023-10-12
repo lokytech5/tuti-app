@@ -26,7 +26,7 @@ const { data, error, isLoading } = useProducts();
     
         <div className="flex-grow p-4 space-y-4">
           <div className='flex flex-wrap justify-center mx-auto px-2'>
-          {data?.product.map((product, index) =>(
+          {data?.product?.map((product, index) =>(
             <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-4 my-2">
             <ProductCard
             id={product._id}

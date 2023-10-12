@@ -5,7 +5,7 @@ import ErrorAlert from '../components/ErrorAlert';
 import useProducts from '../hooks/useProducts';
 
 const LatestProduct = () => {
-  const { data, error, isLoading } = useProducts();
+  const { data, error, isLoading } = useProducts({ endpoint: '/products/latest' });
 
   if(isLoading) return <LoadingSpinner/>
   if(error) return <ErrorAlert message={error.message}/>
@@ -14,7 +14,7 @@ const LatestProduct = () => {
  <h1 className="text-5xl font-bold mb-6 text-center">Latest Products</h1>
 
  <div className="flex flex-wrap justify-center gap-10">
- {data?.product.map((product, index) => (
+ {data?.latestProducts?.map((product, index) => (
             <ProductCard
             key={index} 
             id={product._id} 
