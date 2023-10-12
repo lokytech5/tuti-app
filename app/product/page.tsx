@@ -9,7 +9,7 @@ import FilterProduct from './FilterProduct';
 
 const ProductPage = () => {
 
-const { data, error, isLoading } = useProducts();
+const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({itemsPerPage: 6 });
 
   if(isLoading) return <LoadingSpinner/>
   if(error) return <ErrorAlert message={error.message}/>
@@ -26,7 +26,7 @@ const { data, error, isLoading } = useProducts();
     
         <div className="flex-grow p-4 space-y-4">
           <div className='flex flex-wrap justify-center mx-auto px-2'>
-          {data?.product?.map((product, index) =>(
+          {data.pages.flatMap(page => page.product ? page.product : []).map((product, index) =>(
             <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-4 my-2">
             <ProductCard
             id={product._id}
@@ -39,6 +39,12 @@ const { data, error, isLoading } = useProducts();
             </div>
           ))}
            </div>
+           {hasNextPage && (
+                    <div className="text-center mt-4">
+                        <button onClick={() => fetchNextPage()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Load More
+                        </button>
+                    </div>)}
         </div>
       </div>
     </div>

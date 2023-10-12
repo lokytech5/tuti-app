@@ -1,21 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import apiClient from '../components/services/api-client';
 import { ProductResponse } from '../components/types';
 
 interface Props {
     endpoint?: string;
+    itemsPerPage?: number;
   }
 
-const useProducts = ({endpoint = '/products'} : Props = {}) => {
- 
-    const fetchProducts = () => 
-        apiClient
-            .get(endpoint)
-            .then(res => res.data);
+const useProducts = ({endpoint = '/products' , itemsPerPage = 4} : Props = {}) => {
+   
 
-    return useQuery<ProductResponse, Error>({
-        queryKey: [endpoint],
-        queryFn: fetchProducts
+    const fetchProducts = ({ pageParam = 1 }) => {
+        const skipCount = (pageParam - 1) * itemsPerPage;
+        return apiClient
+            .get(`${endpoint}?skip=${skipCount}`) // Changed page to skip
+            .then(res => res.data);
+    };
+    
+    return useInfiniteQuery<ProductResponse, Error>({
+        queryKey: [endpoint, itemsPerPage],
+        queryFn: fetchProducts,
+        getNextPageParam: (lastPage, allPages) => {
+            const nextPage = allPages.length + 1;
+            return nextPage <= lastPage.totalPages ? nextPage : undefined;
+        },
     });
     }
 
