@@ -1,12 +1,10 @@
-import React from 'react'
-import apiClient from '../components/services/api-client'
 import { useQuery } from '@tanstack/react-query';
+import apiClient from '../components/services/api-client';
 import { ProductResponse } from '../components/types';
 
 interface Props {
     endpoint?: string;
   }
-
 
 const useProducts = ({endpoint = '/products'} : Props = {}) => {
  
