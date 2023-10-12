@@ -5,6 +5,8 @@ import FilterProduct from './FilterProduct';
 import apiClient from '../components/services/api-client';
 import { useQuery } from '@tanstack/react-query';
 import useProducts from '../hooks/useProducts';
+import ErrorAlert from '../components/ErrorAlert';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 
 const ProductPage = () => {
@@ -16,8 +18,8 @@ const ProductPage = () => {
 
 const { data, error, isLoading } = useProducts();
 
-  if(isLoading) return <div>..isLoading</div>
-  if(error?.message) return <div>Error please try again</div>
+  if(isLoading) return <LoadingSpinner/>
+  if(error) return <ErrorAlert message={error.message}/>
 
   
   return (
