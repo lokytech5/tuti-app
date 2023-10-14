@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { FaShoppingCart, FaEye, FaSearchPlus  } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 interface ProductCardProps {
     id:number | string;
@@ -13,6 +14,12 @@ interface ProductCardProps {
   }
 
 const ProductCard = (product: ProductCardProps) => {
+    const router = useRouter();
+
+    const handleDetailsClick = () => {
+        router.push(`/products/${product.id}`);
+      }
+
   return (
     <div className="card card-compact w-72 bg-netural-100 shadow-2xl">
       <figure>
@@ -30,7 +37,7 @@ const ProductCard = (product: ProductCardProps) => {
             <div className="flex justify-center items-center p-4 space-x-4 w-full">
                 {product.showDetailsButton ? (
                     <div className="flex justify-between items-center w-full">
-                        <button className="btn btn-primary w-1/2">Details</button>
+                        <button className="btn btn-primary w-1/2 " onClick={handleDetailsClick}>Details</button>
                         {product.showAddToCartButton &&
                             <button className="btn btn-accent rounded-full w-1/6 text-neutral-100 hover:bg-red-500 transition-colors duration-300 p-2 group">
                                 

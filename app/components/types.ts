@@ -20,6 +20,7 @@ export interface Product {
     createdAt: string;
     updatedAt: string;
     __v: number;
+    viewCount: number;
   }
 
 export interface ProductResponse {
@@ -49,4 +50,9 @@ export interface CategoryResponse {
   categories: Category[];
   totalPages: number;
 }
+
+export interface SingleProductResponse {
+  product: Product;
+}
+
 
