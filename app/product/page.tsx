@@ -13,8 +13,7 @@ const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({ite
 
   if(isLoading) return <LoadingSpinner/>
   if(error) return <ErrorAlert message={error.message}/>
-
-  
+ 
   return (
     <>
     <div className="min-h-screen bg-gray-100">

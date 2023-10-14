@@ -1,56 +1,32 @@
 import React from 'react'
 import Image from 'next/image'
 import CuratedProductCard from './CuratedProductCard'
+import useCurated from '../hooks/useCurated'
+import LoadingSpinner from '../components/LoadingSpinner'
+import ErrorAlert from '../components/ErrorAlert'
+import { CuratedCollectionResponse } from '../components/types'
 const CuratedCollection = () => {
-    const products = [
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated1.jpeg'
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated2.jpeg'
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated3.jpeg'
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated4.jpeg'
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated5.jpeg'
-        },
-        {
-            title: 'Kinky Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/curated6.jpeg'
-        },
-        {
-            title: 'Curly Hair',
-      description: 'If a dog chews shoes whose shoes does he choose?',
-      image: '/images/hair3.jpg'
-        }
-    ]
+    const {data, error, isLoading} = useCurated()
+    const collections: CuratedCollectionResponse['collections'] = data?.collections || [];
+
+    if(isLoading) return <LoadingSpinner/>
+    if (error) {
+      // Adjust this based on the actual structure of your error object
+      const errorMessage = typeof error === 'string' ? error : 'An error occurred';
+      return <ErrorAlert message={errorMessage} />;
+  }
   return (
     <section className="p-8 bg-base text-base-content">
  <h1 className="text-5xl font-bold mb-6 text-center">New Arrivals</h1>
 
 
  <div className="flex flex-wrap justify-center gap-10">
-          {products.map((product, index) => (
+          {collections.map((collection, index) => (
             <CuratedProductCard
             key={index} 
-            id={0} 
-            name={product.title} 
-            image={product.image}/>
+            id={collection._id} 
+            name={collection.name} 
+            image={collection.bannerImage}/>
           ))}
         </div>
 

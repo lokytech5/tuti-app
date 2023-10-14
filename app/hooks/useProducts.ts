@@ -9,7 +9,6 @@ interface Props {
 
 const useProducts = ({endpoint = '/products' , itemsPerPage = 4} : Props = {}) => {
    
-
     const fetchProducts = ({ pageParam = 1 }) => {
         const skipCount = (pageParam - 1) * itemsPerPage;
         return apiClient

@@ -37,24 +37,21 @@ const FilterProduct = () => {
          
         </div>
       </div>
-      
-    
 
     {/* Filter by Price */}
-    <div className="flex flex-col space-y-4 w-full h-52 bg-base-300 rounded-box">
+    <div className="flex flex-col justify-center w-full h-52 bg-base-300 rounded-box">
     <div className='mt-5 mb-5'>
       <label className="label">
         <span className="label-text">Filter by Price</span>
       </label>
-      <input type="range" min={0} max="100" value="40" className="range" />
-    </div>
-
-    {/* Filter by Product */}
-    <div className="form-control">
-      <label className="label cursor-pointer">
-        <span className="label-text">Filter by Product</span> 
-        <input type="checkbox" checked className="checkbox" />
-      </label>
+      <input type="range" min={0} max="100" value="25" className="range" step="25" />
+      <div className="w-full flex justify-between text-xs px-2">
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+      <span>|</span>
+</div>
     </div>
     </div>
 
