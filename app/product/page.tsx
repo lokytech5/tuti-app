@@ -25,7 +25,7 @@ const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({ite
         <FilterProduct/>
     
         <div className="flex-grow p-4 space-y-4">
-          <div className='flex flex-wrap justify-center mx-auto px-2'>
+          <div className='flex flex-wrap justify-center mx-auto px-2 text-base-content'>
           {data.pages.flatMap(page => page.product ? page.product : []).map((product, index) =>(
             <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-4 my-2">
             <ProductCard

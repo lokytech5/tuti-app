@@ -35,7 +35,7 @@ const LatestProduct = () => {
         <button
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
-          className="btn btn-primary"
+          className="btn btn-secondary"
         >
           {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load More' : 'No more products'}
         </button>

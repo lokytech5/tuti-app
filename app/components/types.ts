@@ -1,20 +1,19 @@
 export interface Category {
-    _id: string;
-    name: string;
-    description: string;
-    image: string;
-    colors: string[];
-    inches: number;
-    __v: number;
-  }
-
+  _id: string;
+  name: string;
+  description: string;
+  image: string;
+  colors: string[];
+  inches: number;
+  __v: number;
+}
 export interface Product {
     _id: string;
     name: string;
     description: string;
     price: number;
     image: string;
-    category: Category;
+    category: string;
     stock: number;
     averageRating: number;
     reviews: any[];
@@ -33,3 +32,16 @@ export interface LatestProductResponse {
     latestProducts: Product[];
     totalPages: number;
 }
+
+export interface CuratedCollection {
+  _id: string;
+  name: string;
+  description: string;
+  bannerImage: string;
+  product: Product[];
+}
+
+export interface CuratedCollectionResponse {
+  collections: CuratedCollection[];
+}
+
