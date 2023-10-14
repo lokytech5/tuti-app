@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import useProducts from '../hooks/useProducts';
 import FilterProduct from './FilterProduct';
 import { useFilterStore } from '../components/useFilterStore';
+import { useRouter } from 'next/navigation';
 
 
 const ProductPage = () => {
@@ -13,6 +14,12 @@ const ProductPage = () => {
 
 const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({itemsPerPage: 6,  category: categoryFilter || undefined,
   size: sizeFilter || undefined, sortOrder: sortOrder});
+
+  const router = useRouter();
+
+  const handleDetailsClick = (productId: string) => {
+    router.push(`/products/${productId}`);
+  };
 
   if(isLoading) return <LoadingSpinner/>
   if(error) return <ErrorAlert message={error.message}/>
@@ -37,7 +44,8 @@ const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({ite
             price={product.price}
             image={product.image}
             showAddToCartButton={true}
-            showDetailsButton={true}/>
+            showDetailsButton={true}
+            onDetailsClick={() => handleDetailsClick(product._id)}/>
             </div>
           ))}
            </div>

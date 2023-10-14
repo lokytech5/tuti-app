@@ -22,6 +22,7 @@ const ProductDetailsPage = () => {
     return (
       <div>
         <h1>{data?.product.name}</h1>
+        <h2>Product details page here</h2>
         {/* You can add more product properties here as needed */}
       </div>
     );
