@@ -9,10 +9,10 @@ import { useFilterStore } from '../components/useFilterStore';
 
 
 const ProductPage = () => {
-  const { categoryFilter, sizeFilter } = useFilterStore();
+  const { categoryFilter, sizeFilter, sortOrder } = useFilterStore();
 
 const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({itemsPerPage: 6,  category: categoryFilter || undefined,
-  size: sizeFilter || undefined});
+  size: sizeFilter || undefined, sortOrder: sortOrder});
 
   if(isLoading) return <LoadingSpinner/>
   if(error) return <ErrorAlert message={error.message}/>

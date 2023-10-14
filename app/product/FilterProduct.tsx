@@ -5,18 +5,20 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import useProducts from '../hooks/useProducts';
 
 const FilterProduct = () => {
-  const {categoryFilter, sizeFilter, priceFilter,
-         setPriceFilter, setCategoryFilter, setSizeFilter  } = useFilterStore();
+  const {categoryFilter, sizeFilter, sortOrder,
+         resetFilters, setsortOrder, setCategoryFilter, setSizeFilter  } = useFilterStore();
 
   const { data: categoryData, error, isLoading } = useCategory();
-  const {data: priceData} = useProducts({ price: priceFilter});
+  const {data: priceData} = useProducts({ sortOrder: sortOrder});
 
   const handleCategoryChange = (categoryId: string) => {
+        resetFilters();
         setCategoryFilter(categoryId);
         console.log("Updated categoryFilter:", categoryId);
   };
       
   const handleSizeChange = (size: number) => {
+    resetFilters();
         setSizeFilter(size);
         console.log("Updated sizeFilter:", size);
   };
@@ -63,24 +65,26 @@ const FilterProduct = () => {
     <div className="flex flex-col justify-center w-full h-52 bg-base-300 rounded-box">
     <div className='mt-5 mb-5'>
       <label className="label">
-        <span className="label-text">Filter by Price</span>
+        <span className="label-text">Sort by Price</span>
       </label>
 
-      <input type="range"
-       min={0} max="100" 
-       value={priceFilter || 0}
-       className="range" 
-       step="25"
-       onChange={(e) => setPriceFilter(Number(e.target.value))} />
-      <div className="w-full flex justify-between text-xs px-2">
-      <span>|</span>
-      <span>|</span>
-      <span>|</span>
-      <span>|</span>
-      <span>|</span>
-</div>
+      <select 
+      className="select select-bordered w-full max-w-xs" 
+      value={sortOrder || ''}
+      onChange={(e) => setsortOrder(e.target.value)}
+    >
+      <option value=''>Select Order</option>
+      <option value='asc'>Low to High</option>
+      <option value='desc'>High to Low</option>
+    </select>
+      
+    </div>
+
+    <div>
+    <button onClick={resetFilters}>Reset All Filters</button>
     </div>
     </div>
+    
 
     </div>
   )

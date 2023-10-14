@@ -5,20 +5,20 @@ import { ProductResponse } from '../components/types';
 interface Props {
     endpoint?: string;
     itemsPerPage?: number;
-    price?: number | null;
+    sortOrder?: string | null; 
     category?: string | null;
     size?: number
   }
 
-const useProducts = ({endpoint = '/products' , itemsPerPage = 4, price, category, size} : Props = {}) => {
+const useProducts = ({endpoint = '/products' , itemsPerPage = 4, sortOrder, category, size} : Props = {}) => {
    
     const fetchProducts = ({ pageParam = 1 }) => {
         const skipCount = (pageParam - 1) * itemsPerPage;
 
         let queryParams = `?skip=${skipCount}`;
 
-        if (price) {
-            queryParams += `&price=${price}`;
+        if (sortOrder) {
+            queryParams += `&sortOrder=${sortOrder}`;
          }
 
          if (category) {
@@ -36,7 +36,7 @@ const useProducts = ({endpoint = '/products' , itemsPerPage = 4, price, category
     };
     
     return useInfiniteQuery<ProductResponse, Error>({
-        queryKey: [endpoint, itemsPerPage,  category, size],
+        queryKey: [endpoint, itemsPerPage,  category, size, sortOrder],
         queryFn: fetchProducts,
         getNextPageParam: (lastPage, allPages) => {
             const nextPage = allPages.length + 1;

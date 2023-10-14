@@ -2,11 +2,11 @@ import { create } from "zustand";
 
 
 interface FilterState {
- priceFilter: number | null;
+ sortOrder: string | null;
  categoryFilter: string | null;
  sizeFilter: number | null;
 
-  setPriceFilter: (price: number | null) => void;
+  setsortOrder: (price: string | null) => void;
   setCategoryFilter: (categoryId: string | null) => void;
   setSizeFilter: (size: number | null) => void;
   resetFilters: () => void;
@@ -14,13 +14,13 @@ interface FilterState {
 }
 
 export const useFilterStore = create<FilterState>((set) => ({
-    priceFilter: null,
+    sortOrder: null,
     categoryFilter: null,
     sizeFilter: null,
 
-    setPriceFilter: (price) => set({ priceFilter: price }),
+    setsortOrder: (price) => set({ sortOrder: price }),
     setCategoryFilter: (categoryId) => set({ categoryFilter: categoryId }),
     setSizeFilter: (size) => set({ sizeFilter: size }),
-    resetFilters: () => set({ priceFilter: null, categoryFilter: null, sizeFilter: null }),
+    resetFilters: () => set({ sortOrder: null, categoryFilter: null, sizeFilter: null }),
 
 }));
