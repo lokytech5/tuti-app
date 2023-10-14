@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CategoryResponse } from '../components/types';
 
 
-const useCategory = (endpoint = '/categorys') => {
+const useCategory = (endpoint = '/categorys/all') => {
     const fetchCategory = () => {
         return apiClient.get(endpoint).then(res => res.data);
     };
@@ -13,7 +13,7 @@ const useCategory = (endpoint = '/categorys') => {
         queryKey: ['category', endpoint],
         queryFn: fetchCategory,
     });
-    
+
 
     return queryInfo;
 }

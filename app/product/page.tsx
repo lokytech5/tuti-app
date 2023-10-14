@@ -5,11 +5,14 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ProductCard from '../components/ProductCard';
 import useProducts from '../hooks/useProducts';
 import FilterProduct from './FilterProduct';
+import { useFilterStore } from '../components/useFilterStore';
 
 
 const ProductPage = () => {
+  const { categoryFilter, sizeFilter } = useFilterStore();
 
-const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({itemsPerPage: 6 });
+const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({itemsPerPage: 6,  category: categoryFilter || undefined,
+  size: sizeFilter || undefined});
 
   if(isLoading) return <LoadingSpinner/>
   if(error) return <ErrorAlert message={error.message}/>

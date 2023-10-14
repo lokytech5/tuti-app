@@ -5,19 +5,38 @@ import { ProductResponse } from '../components/types';
 interface Props {
     endpoint?: string;
     itemsPerPage?: number;
+    price?: number | null;
+    category?: string | null;
+    size?: number
   }
 
-const useProducts = ({endpoint = '/products' , itemsPerPage = 4} : Props = {}) => {
+const useProducts = ({endpoint = '/products' , itemsPerPage = 4, price, category, size} : Props = {}) => {
    
     const fetchProducts = ({ pageParam = 1 }) => {
         const skipCount = (pageParam - 1) * itemsPerPage;
+
+        let queryParams = `?skip=${skipCount}`;
+
+        if (price) {
+            queryParams += `&price=${price}`;
+         }
+
+         if (category) {
+            queryParams += `&category=${category}`;
+        }
+        if (size) {
+            queryParams += `&size=${size}`;
+            console.log(`${endpoint}${queryParams}`);
+
+        }
+
         return apiClient
-            .get(`${endpoint}?skip=${skipCount}`) // Changed page to skip
+            .get(`${endpoint}${queryParams}`) // Changed page to skip
             .then(res => res.data);
     };
     
     return useInfiniteQuery<ProductResponse, Error>({
-        queryKey: [endpoint, itemsPerPage],
+        queryKey: [endpoint, itemsPerPage,  category, size],
         queryFn: fetchProducts,
         getNextPageParam: (lastPage, allPages) => {
             const nextPage = allPages.length + 1;
