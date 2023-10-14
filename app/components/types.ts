@@ -45,3 +45,8 @@ export interface CuratedCollectionResponse {
   collections: CuratedCollection[];
 }
 
+export interface CategoryResponse {
+  categories: Category[];
+  totalPages: number;
+}
+
