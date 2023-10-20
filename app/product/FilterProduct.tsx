@@ -62,14 +62,14 @@ const FilterProduct = () => {
       </div>
 
     {/* Filter by Price */}
-    <div className="flex flex-col justify-center w-full h-52 bg-base-300 rounded-box">
-    <div className='mt-5 mb-5'>
+    <div className="flex flex-col items-center justify-center w-full h-52 bg-base-300 rounded-box p-4 space-y-4">
+    <div className="w-full max-w-xs">
       <label className="label">
         <span className="label-text">Sort by Price</span>
       </label>
 
       <select 
-      className="select select-bordered w-full max-w-xs" 
+      className="select select-bordered w-full mt-2 text-secondary-content"
       value={sortOrder || ''}
       onChange={(e) => setsortOrder(e.target.value)}
     >
@@ -80,8 +80,8 @@ const FilterProduct = () => {
       
     </div>
 
-    <div>
-    <button onClick={resetFilters}>Reset All Filters</button>
+    <div className="w-full max-w-xs">
+    <button className="btn btn-secondary w-full" onClick={resetFilters}>Reset All Filters</button>
     </div>
     </div>
     

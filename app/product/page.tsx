@@ -18,7 +18,7 @@ const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({ite
   const router = useRouter();
 
   const handleDetailsClick = (productId: string) => {
-    router.push(`/products/${productId}`);
+    router.push(`/product/${productId}`);
   };
 
   if(isLoading) return <LoadingSpinner/>

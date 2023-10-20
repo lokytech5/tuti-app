@@ -1,18 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react'
 import apiClient from '../components/services/api-client';
-import { SingleProductResponse } from '../components/types';
+import { Product } from '../components/types';
 
 interface Props {
     productId: string | undefined;
   }
 
   const useProductDetails = ({ productId }: Props) => {
-    const fetchProductDetails = (): Promise<SingleProductResponse> => {
-        return apiClient.get(`/products/${productId}`).then(res => res.data);
+    const fetchProductDetails = (): Promise<Product> => {
+      if (!productId) {
+        return Promise.reject(new Error("Product ID is undefined."));
+    }     
+        return apiClient.get(`/products/${productId}`)
+            .then(res => {          
+                return res.data;
+            })       
     }
-    
-    return useQuery<SingleProductResponse, Error>(['product', productId], fetchProductDetails);
+    return useQuery<Product, Error>(['product', productId], fetchProductDetails);
   };
 
 export default useProductDetails
