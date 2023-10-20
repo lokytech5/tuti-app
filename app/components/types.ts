@@ -13,7 +13,7 @@ export interface Product {
     description: string;
     price: number;
     image: string;
-    category: string;
+    category: Category;
     stock: number;
     averageRating: number;
     reviews: any[];
@@ -53,6 +53,10 @@ export interface CategoryResponse {
 
 export interface SingleProductResponse {
   product: Product;
+}
+
+export interface SingleCategoryResponse {
+  category: Category;
 }
 
 
