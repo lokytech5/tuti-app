@@ -55,8 +55,4 @@ export interface SingleProductResponse {
   product: Product;
 }
 
-export interface SingleCategoryResponse {
-  category: Category;
-}
-
 

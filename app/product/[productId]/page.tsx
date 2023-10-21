@@ -21,19 +21,13 @@ const ProductDetailsPage = ({ params: {productId }}: Props) => {
    const categoryId = product?.category?._id;
    const { data: category, isLoading: categoryLoading, error: categoryError } = useSpecificCategory({ categoryId });
 
-   // const category = categoryResponse?.category;
-
-   console.log('Rendering ProductDetails');
-   console.log('Product:', product);
- console.log('Category:', category);
-
    // Check for loading status for both product and category
    if (productLoading || categoryLoading) return <div><LoadingSpinner/></div>;
 
    // Check for errors for both product and category
    if (productError || categoryError) return <div><ErrorAlert/></div>;
   
-   return product && category ? <ProductDetails product={product} category={category.category} /> : null;  
+   return product && category ? <ProductDetails product={product} category={category} /> : null;  
 }
 
 export default ProductDetailsPage

@@ -9,14 +9,14 @@ interface Props {
 }
 
 const ProductDetails = ({product, category}: Props) => {
-  console.log('Rendering ProductDetailsPage');
-  console.log('Rendering ProductDetailsPage');
-  if(category){
-    console.log("Colors:", category.colors);
-  } else {
-    console.log("Category not yet loaded.");
-  }
 
+  const colorMapping: Record<string, string> = {
+    'Golden Blonde': '#f5c145',
+    'Platinum': '#e6e8e6',
+    'Ash Brown': '#a89f91'
+    // Add other colors as needed
+  };
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 md:bg-white">
     <div className="bg-white shadow-lg rounded-lg mx-6 mt-6 md:mt-0 flex flex-col md:flex-row w-full md:max-w-2xl">
@@ -60,16 +60,33 @@ const ProductDetails = ({product, category}: Props) => {
             ${product.price}
           </div>
 
-          <ul style={{backgroundColor: 'red'}}>
-  {category?.colors?.map((color, index) => (
-    <li key={index} style={{backgroundColor: 'blue', color: 'green'}}>
-      {color}
-    </li>
-  ))}
-</ul>
+          <div className="mb-4">
+            <h4 className="text-lg font-semibold mb-2 text-secondary-content">Select Color:</h4>
+            <ul className="flex space-x-2 text-secondary-content">
+            {category.colors.map((color, index) => (
+                <li key={index}>
+                  {/* This div represents the color. Adjust width, height, and borderRadius as desired. */}
+                  <div 
+                    style={{
+                      backgroundColor: colorMapping[color] || 'transparent', 
+                      width: '30px', 
+                      height: '30px', 
+                      borderRadius: '50%', 
+                    }}
+                    
+                    onClick={() => {
+                      console.log(color);
 
-
-          {/* Any other product details like buttons can be added here */}
+                      // Handle color selection here
+                      console.log(`Selected color: ${color}`);
+                    }}
+                    className="cursor-pointer hover:opacity-75" // Add hover effect for better UX
+                  ></div>
+                </li>
+            ))}
+            </ul>
+          </div>
+     {/* Any other product details like buttons can be added here */}
         </div>
       </div>
     </div>
