@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Drawer from './Drawer'
 import UserMenu from './UserMenu'
 import HamburgerMenu from './HamburgerMenu'
 import DesktopMenu from './DesktopMenu'
 import Cart from './Cart'
 import Link from 'next/link'
-import { toggleTheme } from './themeUtils'
 import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
