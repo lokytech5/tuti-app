@@ -39,14 +39,14 @@ const decreaseQuantity = () => {
       </div>
       <div className="p-6 w-full">
         {/* Category Name */}
-        <h3 className="text-1xl mb-2 text-secondary-content">
+        <h4 className="mb-2 text-secondary-content">
           {category.name}
-        </h3>
+        </h4>
 
         {/* Product Name */}
-        <h3 className="text-2xl font-semibold mb-2.5 text-secondary-content">
+        <h2 className="product-name-large text-secondary-content">
           {product.name}
-        </h3>
+        </h2>
         
         {/* Rating and View Count */}
 <div className="flex items-center space-x-3.5 mb-4"> {/* Adjusted the space here using space-x utility */}
@@ -67,12 +67,12 @@ const decreaseQuantity = () => {
   </div>
 </div>     
         {/* Product Description */}
-        <p className="text-gray-500 w-full mb-4">
+        <p className="product-description text-secondary-content">
             {product.description}
           </p>
 
           <div className="mb-4 flex items-center space-x-2.5"> {/* Using flex utilities */}
-    <h4 className="text-md font-semibold mb-0 text-secondary-content">Color:</h4>
+    <h4 className="color-label text-md font-semibold mb-0 text-secondary-content">Color:</h4>
     <ul className="flex space-x-2 text-secondary-content mb-0">
             {category.colors.map((color, index) => (
                 <li key={index}>
@@ -92,13 +92,13 @@ const decreaseQuantity = () => {
 
           {/* Adding the inches using DaisyUI's badge or pill */}
 <div className="mb-6 flex items-center space-x-2.5">
-    <h4 className="text-md font-semibold mb-0 text-secondary-content">Length:</h4>
-    <span className="badge badge-primary text-md">{category.inches}"</span>
+    <h4 className="length-label text-md font-semibold mb-0 text-secondary-content">Length:</h4>
+    <span className="length-value badge badge-primary text-md">{category.inches}"</span>
           </div>
 
           {/* Stock availability */}
 <div className="mb-6 flex items-center space-x-2.5">
-    <h4 className="text-md font-semibold mb-0 text-secondary-content">Stock:</h4>
+    <h4 className="stock-label font-semibold mb-0 text-secondary-content">Stock:</h4>
     {product.stock < 5 ?
         <span className="badge badge-error text-md">Low Stock</span> :
         <span className="badge badge-success text-md">In Stock</span>
@@ -106,7 +106,7 @@ const decreaseQuantity = () => {
 </div>
 
 <div className="mb-6 flex flex-col-reverse sm:flex-row w-full justify-between">
-    <span className="text-4xl font-extrabold text-black mb-4 sm:mb-0">${product.price.toLocaleString()}</span>
+<span className="product-price-large text-secondary-content">#{product.price.toLocaleString()}</span>
     <div className="flex items-center mb-4 sm:mb-0">
         <span className="text-md sm:text-md font-semibold text-gray-600 mr-2 sm:mr-3">Quantity:</span>
         <button 

@@ -3,8 +3,19 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './components/Navbar/Navbar'
 import Providers from './provider'
+import { Playfair_Display, Open_Sans } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ["300", "400", "500", "700"]
+})
+
+const playFair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ["400", "700"]
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="cupcake">
           
-      <body className={inter.className}>
+      <body>
       <Providers>
       <Navbar/>
       <main>{children}</main> 

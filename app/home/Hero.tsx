@@ -18,8 +18,8 @@ const Hero = () => {
  </div>
  
  <header>
-         <h1 className="text-5xl lg:text-6xl font-bold mb-4">Welcome to Tuti Hairs</h1>
-         <p className="text-3xl mb-6">
+ <h1 className="text-5xl lg:text-6xl font-bold mb-4 font-serif">Welcome to Tuti Hairs</h1>
+ <p className="text-3xl mb-6">
            Discover exclusive deals, premium products, and affordable hairs.
          </p>
 

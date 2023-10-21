@@ -3,19 +3,128 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+    font-family: 'Open Sans', sans-serif; /* Default font for the body */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgb(var(--foreground-rgb));
 }
+
+/* Playfair Display for headings */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Open Sans for other headings */
+h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+h5 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 20px;
+}
+
+/* Links */
+a {
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+a:hover {
+    /* Any hover effect you'd like to add */
+}
+
+/* Product Name in Product Cards */
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  min-height: 50px;
+}
+
+.product-price {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.product-name-large {
+  font-size: 30px;
+}
+
+.product-price-large {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.product-description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px; /* or 16px, if preferred */
+  font-weight: 400; /* or 500 for medium weight */
+}
+
+/* For Stock, Length, and Color labels */
+.stock-label, .length-label, .color-label {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px; 
+  margin-right: 8px;
+}
+
+/* For the actual value/details (this might vary depending on your design) */
+.stock-value, .length-value, .color-value {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* And so on for other classes based on your guidelines... */

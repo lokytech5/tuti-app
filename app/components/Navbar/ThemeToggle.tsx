@@ -2,8 +2,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
 const ThemeToggle = () => {
-  const storedTheme = localStorage.getItem("theme") || "bumblebee";
-  const [theme, setTheme] = useState(storedTheme);
+  const [theme, setTheme] = useState("bumblebee"); // default value
+
+  useEffect(() => {
+    // Get the stored theme from localStorage on component mount (client-side only)
+    const storedTheme = localStorage.getItem("theme") || "bumblebee";
+    setTheme(storedTheme);
+  }, []);
 
   const handleToggle = (e: ChangeEvent<HTMLInputElement>) => {
     if(e.target.checked) {

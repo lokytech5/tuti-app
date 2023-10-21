@@ -21,12 +21,12 @@ const ProductCard = (product: ProductCardProps) => {
       </figure>
 
       <div className="flex-grow flex flex-col justify-center items-center p-2">
-                <div className="flex justify-between items-center w-full mb-2">
-                    <h2 className="card-title text-1xl font-semibold text-primary-500">{product.name}</h2>
-                    <p className="font-bold text-sm">#{product.price}</p>
-                </div>
-                <p className="text-sm">{product.description}</p>
-            </div>
+        <div className="grid grid-cols-[1fr,auto] items-center gap-4 w-full mb-2">
+          <h2 className="product-name">{product.name}</h2>
+          <p className="product-price">#{product.price.toLocaleString()}</p>
+        </div>
+        <p className="product-description">{product.description}</p>
+      </div>
     
             <div className="flex justify-center items-center p-4 space-x-4 w-full">
                 {product.showDetailsButton ? (
