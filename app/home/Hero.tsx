@@ -8,12 +8,8 @@ const Hero = () => {
 <div className="hero-content flex-col lg:flex-row-reverse">
 
 <div className="w-full lg:w-96 carousel rounded-box flex-shrink-0 ">
-<div className="carousel-item w-full">
 <Image src={pic1} className="w-full lg:max-w-sm rounded-lg shadow-2xl" alt="" />
-</div>
-<div className="carousel-item w-full">
-<Image src={pic1} className="w-full lg:max-w-sm rounded-lg shadow-2xl" alt="" />
-</div>
+
 
  </div>
  

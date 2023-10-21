@@ -25,7 +25,7 @@ const decreaseQuantity = () => {
 }
   
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 md:bg-white">
+    <div className="flex items-center justify-center min-h-screen">
    <div className="bg-white shadow-2xl rounded-lg mx-6 mt-6 md:mt-0 flex flex-col md:flex-row w-full lg:w-4/5 xl:w-3/4 relative overflow-hidden">
     {/* Close Button */}
     <button

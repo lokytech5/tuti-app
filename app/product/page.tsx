@@ -26,7 +26,7 @@ const { data, error, isLoading, fetchNextPage, hasNextPage  } = useProducts({ite
  
   return (
     <>
-    <div className="min-h-screen bg-secondary">
+    <div className="min-h-screen">
       <div className="bg-cover h-96 flex md:bg-center" style={{ backgroundImage: `url('/images/background2.jpg')` }}></div>
      
       <div className="flex flex-col lg:flex-row mt-5 items-start">

@@ -26,7 +26,7 @@ const FilterProduct = () => {
     <div className="w-full mt-2 p-4 space-y-4 lg:w-1/4">
 
     {/* Category and Size Dropdown */}
-    <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-primary">
+    <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-primary text-primary-content">
       <div className="collapse-title text-xl font-medium">
         Filter by Categories
       </div>
@@ -44,7 +44,7 @@ const FilterProduct = () => {
         </div>
         
         {/* Sizes Dropdown */}
-        <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-200">
+        <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-primary text-primary-content">
       <div className="collapse-title text-xl font-medium">
         Filter by Inches
       </div>
@@ -62,14 +62,14 @@ const FilterProduct = () => {
       </div>
 
     {/* Filter by Price */}
-    <div className="flex flex-col items-center justify-center w-full h-52 bg-base-300 rounded-box p-4 space-y-4">
+    <div className="flex flex-col items-center justify-center w-full h-52 rounded-box p-4 space-y-4 bg-primary text-primary-content">
     <div className="w-full max-w-xs">
       <label className="label">
         <span className="label-text">Sort by Price</span>
       </label>
 
       <select 
-      className="select select-bordered w-full mt-2 text-secondary-content"
+      className="select select-bordered w-full mt-2 bg-secondary text-secondary-content"
       value={sortOrder || ''}
       onChange={(e) => setsortOrder(e.target.value)}
     >
@@ -81,7 +81,7 @@ const FilterProduct = () => {
     </div>
 
     <div className="w-full max-w-xs">
-    <button className="btn btn-secondary w-full" onClick={resetFilters}>Reset All Filters</button>
+    <button className="btn bg-error text-error-content hover:bg-error-focus w-full" onClick={resetFilters}>Reset All Filters</button>
     </div>
     </div>
     
