@@ -1,9 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { FaShoppingCart, FaEye, FaSearchPlus  } from 'react-icons/fa';
+import useCartStore from './useCartStore';
+import { showToast } from './ToastNotifier';
 
 interface ProductCardProps {
-    id:number | string;
+    id: string;
     name: string;
     description: string;
     price: number;
@@ -14,6 +16,20 @@ interface ProductCardProps {
   }
 
 const ProductCard = (product: ProductCardProps) => {
+
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  const handleAddToCartClick = () => {
+    addToCart({
+      _id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    });
+    showToast("Item added to cart!", 'success');
+    
+  }
+
   return (
     <div className="card card-compact w-72 bg-netural-100 shadow-2xl">
       <figure>
@@ -33,15 +49,17 @@ const ProductCard = (product: ProductCardProps) => {
                     <div className="flex justify-between items-center w-full">
                         <button className="btn btn-primary w-1/2 " onClick={product.onDetailsClick}>Details</button>
                         {product.showAddToCartButton &&
-                            <button className="btn btn-accent rounded-full w-1/6 text-neutral-100 hover:bg-red-500 transition-colors duration-300 p-2 group">
-                                
+                            <button className="btn btn-accent rounded-full w-1/6 text-neutral-100 hover:bg-red-500 transition-colors duration-300 p-2 group"
+                              onClick={handleAddToCartClick}>
+                                    
                                 <FaShoppingCart className="group-hover:text-white"  size={20} />
                             </button>
                         }
                     </div>
                 ) : (
                     product.showAddToCartButton &&
-                    <button className="btn btn-accent text-neutral-100 hover:bg-red-500 transition-colors duration-300">
+                    <button className="btn btn-accent text-neutral-100 hover:bg-red-500 transition-colors duration-300"
+                    onClick={handleAddToCartClick}>
                         Add to cart
                         <FaShoppingCart className="mr-2" size={15} />
                     </button>
