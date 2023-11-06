@@ -64,7 +64,7 @@ const CartModal = ({ isOpen, onClose }: Props) => {
                 </div>
               </div>
               <div className="flex-shrink-0">
-                <span className="text-lg font-bold">${item.product.price}</span>
+                <span className="text-lg font-bold">#{item.product.price.toLocaleString()}</span>
                 <button
                   className="btn btn-xs btn-error btn-circle ml-2"
                   onClick={() => removeFromCart(item.product._id)}

@@ -10,6 +10,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import useCartStore from '../components/useCartStore';
 import { showToast } from '../components/ToastNotifier';
 import ColorSelector from './ColorSelector';
+import QuantitySelector from './QuantitySelector';
 
 interface Props {
   product: Product;
@@ -78,9 +79,6 @@ const handleAddToCartClick = () => {
         {/* Rating and View Count */}
 <div className="flex items-center space-x-3.5 mb-4"> {/* Adjusted the space here using space-x utility */}
   <div className="rating rating-sm flex items-center space-x-2">
-    {/* <p className="text-xs text-gray-600">
-      {product.averageRating}
-    </p> */}
     <div>
       <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
       <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400"  defaultChecked  />
@@ -118,38 +116,18 @@ const handleAddToCartClick = () => {
         <span className="badge badge-success text-md">In Stock</span>
     }
 </div>
-
+{/* quantity spot */}
 <div className="mb-6 flex flex-col-reverse sm:flex-row w-full justify-between">
 <span className="product-price-large text-secondary-content">#{product.price.toLocaleString()}</span>
-    <div className="flex items-center mb-4 sm:mb-0">
-        <span className="text-md sm:text-md font-semibold text-gray-600 mr-2 sm:mr-3">Quantity:</span>
-        <button 
-            onClick={decreaseQuantity}
-            className="px-2 sm:px-3 py-0.5 sm:py-1 bg-black text-sm sm:text-lg border rounded-l-md focus:outline-none"
-        >
-            -
-        </button>
-        <span className="w-12 sm:w-16 px-2 sm:px-3 py-1 text-center text-sm sm:text-lg border-t border-b text-secondary-content">
-            {quantity}
-        </span>
-        <button 
-            onClick={increaseQuantity}
-            className="px-2 sm:px-3 py-0.5 sm:py-1 bg-black text-sm sm:text-lg border rounded-r-md focus:outline-none"
-        >
-            +
-        </button>
-    </div>
+
+<QuantitySelector
+  quantity={quantity}
+  onIncrease={increaseQuantity}
+  onDecrease={decreaseQuantity}/>
 </div> 
 
    {/* Add to Cart Button */}
-   <div className="flex justify-center my-4">
-    <button 
-        className="flex items-center space-x-2 px-12 py-3 bg-accent rounded-full focus:outline-none shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-200"
-        onClick={handleAddToCartClick}>
-        <FaShoppingCart className="w-5 h-5" />
-        <span>Add to Cart</span>
-    </button>
-</div>
+   <AddToCartButton onClick={handleAddToCartClick}/>
      {/* Any other product details like buttons can be added here */}
         </div>     
       </div>
