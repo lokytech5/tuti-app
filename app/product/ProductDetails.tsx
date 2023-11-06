@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Product } from '../components/types';
 import { Category } from '../components/types';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { FaShoppingCart } from 'react-icons/fa';
+
 import ColourBox from './ColourBox';
+import AddToCartButton from './AddToCartButton';
 
 interface Props {
   product: Product;
@@ -14,6 +16,8 @@ const ProductDetails = ({product, category}: Props) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
 
+  const router = useRouter();
+
   const increaseQuantity = () => {
     setQuantity(prev => prev + 1);
 }
@@ -23,13 +27,17 @@ const decreaseQuantity = () => {
         setQuantity(prev => prev - 1);
     }
 }
+
+const closeCard = () => {
+  router.back();
+}
   
   return (
     <div className="flex items-center justify-center min-h-screen">
    <div className="bg-white shadow-2xl rounded-lg mx-6 mt-6 md:mt-0 flex flex-col md:flex-row w-full lg:w-4/5 xl:w-3/4 relative overflow-hidden">
     {/* Close Button */}
     <button
-        // onClick={closeCard} 
+        onClick={closeCard} 
         className="absolute top-0 sm:top-2 right-0 sm:right-2 z-50 p-3 text-3xl text-secondary-content focus:outline-none hover:bg-gray-300 visible sm:visible"
     >
                 X
@@ -128,15 +136,7 @@ const decreaseQuantity = () => {
 </div> 
 
    {/* Add to Cart Button */}
-   <div className="flex justify-center my-4">
-            <button 
-                // onClick={addToCart}
-                className="flex items-center space-x-2 px-12 py-3 bg-accent rounded-full focus:outline-none shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-200"
-            >
-                <FaShoppingCart className="w-5 h-5" />
-                <span>Add to Cart</span>
-            </button>
-        </div>
+   <AddToCartButton/>
      {/* Any other product details like buttons can be added here */}
         </div>
         
