@@ -23,9 +23,10 @@ interface CartState {
   increaseQuantity: (productId: string) => void;
   decreaseQuantity: (productId: string) => void;
   clearCart: () => void;
+  calculateTotal: () => number;
 }
 
-const useCartStore = create<CartState>((set) => ({
+const useCartStore = create<CartState>((set, get) => ({
     items: [],
 
     addToCart: (product) =>
@@ -67,6 +68,12 @@ const useCartStore = create<CartState>((set) => ({
         item.product._id === productId ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
       ),
     })),
+
+    calculateTotal: () => {
+      const { items } = get(); // using get to access current state
+      return items.reduce((total, item) => total + item.quantity * item.product.price, 0);
+    },
+
 
   clearCart: () => set(() => ({ items: [] })),
 

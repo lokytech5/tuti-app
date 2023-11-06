@@ -11,6 +11,9 @@ interface Props {
 const CartModal = ({ isOpen, onClose }: Props) => {
   const items = useCartStore((state) => state.items);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const calculateTotal = useCartStore((state) => state.calculateTotal);
+
+  const totalPrice = calculateTotal();
 
   if (!isOpen) return null;
 
@@ -67,13 +70,17 @@ const CartModal = ({ isOpen, onClose }: Props) => {
                 <span className="text-lg font-bold">#{item.product.price.toLocaleString()}</span>
                 <button
                   className="btn btn-xs btn-error btn-circle ml-2"
-                  onClick={() => removeFromCart(item.product._id)}
-                >
+                  onClick={() => removeFromCart(item.product._id)}>
                   <FaTrashAlt />
                 </button>
-              </div>
+              </div>        
             </div>
           ))}
+          {items.length > 0 && (
+            <div className="py-4 text-lg font-bold">
+              Total: #{totalPrice.toLocaleString()}
+            </div>
+          )}
           <div className="modal-action mt-4 flex flex-col md:flex-row justify-center md:justify-end">
             <button
               className="btn btn-primary self-center md:self-auto"
