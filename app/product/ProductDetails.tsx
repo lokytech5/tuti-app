@@ -9,6 +9,7 @@ import AddToCartButton from './AddToCartButton';
 import { FaShoppingCart } from 'react-icons/fa';
 import useCartStore from '../components/useCartStore';
 import { showToast } from '../components/ToastNotifier';
+import ColorSelector from './ColorSelector';
 
 interface Props {
   product: Product;
@@ -96,25 +97,12 @@ const handleAddToCartClick = () => {
         <p className="product-description text-secondary-content">
             {product.description}
           </p>
-
-          <div className="mb-4 flex items-center space-x-2.5"> {/* Using flex utilities */}
-    <h4 className="color-label text-md font-semibold mb-0 text-secondary-content">Color:</h4>
-    <ul className="flex space-x-2 text-secondary-content mb-0">
-            {category.colors.map((color, index) => (
-                <li key={index}>
-
-                  <ColourBox
-                     colorName={color}
-                     selectedColor={selectedColor}
-                     onChange={(color) => {
-                      setSelectedColor(color);
-                      console.log(`Selected color: ${color}`);
-                    }}
-                  />
-                </li>
-            ))}
-            </ul>
-          </div>
+       
+       {/* ColorSelector spot */}
+       <ColorSelector
+        colors={category.colors}
+        selectedColor={selectedColor}
+        onSelectColor={setSelectedColor} />
 
           {/* Adding the inches using DaisyUI's badge or pill */}
 <div className="mb-6 flex items-center space-x-2.5">
