@@ -7,9 +7,11 @@ import DesktopMenu from './DesktopMenu'
 import Cart from './Cart'
 import Link from 'next/link'
 import ThemeToggle from './ThemeToggle'
+import CartModal from '../CartModal'
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
 
   return (
@@ -27,13 +29,15 @@ const Navbar = () => {
        <ThemeToggle/>
        <DesktopMenu/>
     <div className="flex-none">
-        <Cart/>
+    <Cart onCartClick={() => setIsCartModalOpen(true)}/> 
         <UserMenu/>
     </div>
   </div>
   </div>
   
   <Drawer closeDrawer={() => setIsDrawerOpen(false)} />
+  <CartModal isOpen={isCartModalOpen} onClose={() => setIsCartModalOpen(false)} />
+   
 
 
   </div>

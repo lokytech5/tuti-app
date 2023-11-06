@@ -2,7 +2,7 @@ import React from 'react'
 import { toast, ToastContainer, ToastOptions } from 'react-toastify';
 
 const toastOptions: ToastOptions = {
-    position: "top-right",
+    position: "bottom-right",
     autoClose: 5000,
     hideProgressBar: true,
     closeOnClick: true,
