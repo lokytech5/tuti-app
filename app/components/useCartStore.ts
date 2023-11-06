@@ -7,6 +7,8 @@ interface CartProduct {
     name: string;
     price: number;
     image: string;
+    quantity?: number;
+    selectedColor?: string;
 }
 
 interface CartItem {
@@ -28,16 +30,21 @@ const useCartStore = create<CartState>((set) => ({
 
     addToCart: (product) =>
     set((state) => {
-      const cartItem = state.items.find((item) => item.product._id === product._id);
-      if (cartItem) {
-        return {
-          items: state.items.map((item) =>
-            item.product._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
-          ),
-        };
+      // Check if the cart already has the item with the same ID and selectedColor
+      const cartItemIndex = state.items.findIndex((item) =>
+        item.product._id === product._id &&
+        item.product.selectedColor === product.selectedColor // Check for color as well
+      );
+      
+      if (cartItemIndex > -1) {
+        // Item already in cart, update quantity
+        let newItems = [...state.items];
+        newItems[cartItemIndex].quantity += product.quantity || 1;
+        return { items: newItems };
       } else {
+        // Item not in cart, add new item
         return {
-          items: [...state.items, { product, quantity: 1 }],
+          items: [...state.items, { product, quantity: product.quantity || 1 }],
         };
       }
     }),

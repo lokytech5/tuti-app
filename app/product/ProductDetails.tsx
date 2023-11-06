@@ -6,6 +6,9 @@ import Image from 'next/image';
 
 import ColourBox from './ColourBox';
 import AddToCartButton from './AddToCartButton';
+import { FaShoppingCart } from 'react-icons/fa';
+import useCartStore from '../components/useCartStore';
+import { showToast } from '../components/ToastNotifier';
 
 interface Props {
   product: Product;
@@ -15,6 +18,8 @@ interface Props {
 const ProductDetails = ({product, category}: Props) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   const router = useRouter();
 
@@ -30,6 +35,19 @@ const decreaseQuantity = () => {
 
 const closeCard = () => {
   router.back();
+}
+
+const handleAddToCartClick = () => {
+  addToCart({
+    _id: product._id,
+    name: product.name,
+    price: product.price,
+    image: product.image,
+    quantity: quantity,
+    selectedColor: selectedColor,
+  });
+  showToast("Item added to cart!", 'success');
+  
 }
   
   return (
@@ -136,27 +154,33 @@ const closeCard = () => {
 </div> 
 
    {/* Add to Cart Button */}
-   <AddToCartButton/>
+   <div className="flex justify-center my-4">
+    <button 
+        className="flex items-center space-x-2 px-12 py-3 bg-accent rounded-full focus:outline-none shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-200"
+        onClick={handleAddToCartClick}>
+        <FaShoppingCart className="w-5 h-5" />
+        <span>Add to Cart</span>
+    </button>
+</div>
      {/* Any other product details like buttons can be added here */}
-        </div>
-        
-        
+        </div>     
       </div>
-      {/* Floating Write Review Button */}
-      {/* <div className="fixed bottom-6 right-6">
-            <button 
-                // onClick={openReviewModal}
-                className="px-6 py-2 bg-blue-600 text-white rounded-full focus:outline-none shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-200"
-            >
-                Write Review
-            </button>
-        </div> */}
     </div>
 
-  )
-   
+)
+
 }
 
 export default ProductDetails
 
 
+
+{/* Floating Write Review Button */}
+{/* <div className="fixed bottom-6 right-6">
+      <button 
+          // onClick={openReviewModal}
+          className="px-6 py-2 bg-blue-600 text-white rounded-full focus:outline-none shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-200"
+      >
+          Write Review
+      </button>
+  </div> */}
