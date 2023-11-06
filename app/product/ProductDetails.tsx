@@ -3,10 +3,7 @@ import { Product } from '../components/types';
 import { Category } from '../components/types';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-
-import ColourBox from './ColourBox';
 import AddToCartButton from './AddToCartButton';
-import { FaShoppingCart } from 'react-icons/fa';
 import useCartStore from '../components/useCartStore';
 import { showToast } from '../components/ToastNotifier';
 import ColorSelector from './ColorSelector';

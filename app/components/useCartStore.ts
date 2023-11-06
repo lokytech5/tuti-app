@@ -24,6 +24,8 @@ interface CartState {
   decreaseQuantity: (productId: string) => void;
   clearCart: () => void;
   calculateTotal: () => number;
+  initializeCart: () => void;
+  persistCart: () => void;
 }
 
 const useCartStore = create<CartState>((set, get) => ({
@@ -76,6 +78,43 @@ const useCartStore = create<CartState>((set, get) => ({
 
 
   clearCart: () => set(() => ({ items: [] })),
+
+  initializeCart: () => {
+    const savedCart = localStorage.getItem('cart');
+    if(savedCart) {
+      try {
+        // Ensuring that the parsed data is a CartItem array
+        const parsedCart = JSON.parse(savedCart);
+        if (Array.isArray(parsedCart)) { // Check if it's an array
+          // Further validation can be done here to ensure every item matches CartItem type
+          set({ items: parsedCart });
+        }
+      } catch (error) {
+        console.error('Failed to parse the cart items from localStorage:', error);
+        // Handle errors, perhaps clear the localStorage item if it's corrupted
+        localStorage.removeItem('cart');
+      }
+    }
+  },
+
+  persistCart: () => {
+    const items = get().items;
+  // Make sure that you only persist items that have the necessary properties
+  const itemsToPersist = items.map(item => ({
+    product: {
+      _id: item.product._id,
+      name: item.product.name,
+      price: item.product.price,
+      image: item.product.image,
+      // Add other necessary product fields here
+      selectedColor: item.product.selectedColor,
+    },
+    quantity: item.quantity
+  }));
+  
+  localStorage.setItem('cart', JSON.stringify(itemsToPersist));
+},
+  
 
 }));
 
