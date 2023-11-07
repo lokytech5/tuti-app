@@ -55,4 +55,34 @@ export interface SingleProductResponse {
   product: Product;
 }
 
+export interface RegisterUserData{
+  username: string;
+  password: string;
+  email: string;
+}
 
+export interface RegisterUserResponse {
+  _id: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+}
+
+export interface LoginUserData {
+  username: string;
+  password: string;
+}
+
+export interface LoginUserResponse {
+  token: string;
+  username: string;
+}
+
+// For the verify user functionality
+export interface VerifyUserRequest {
+  token: string;
+}
+
+export interface VerifyUserResponse {
+  message: string;
+}
