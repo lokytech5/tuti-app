@@ -8,12 +8,13 @@ import { useForm } from 'react-hook-form'
 import useRegisterUser from '../hooks/useRegisterUser'
 import ErrorAlert from '../components/ErrorAlert'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { showToast } from '../components/ToastNotifier'
 
 
 const schema = z.object({
     username: z.string().min(1, 'Username is required'),
     email: z.string().email('Invalid email address'),
-    password: z.string().min(6, 'Password must be at least 6 characters long'),
+    password: z.string().min(5, 'Password must be at least 5 characters long'),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -29,7 +30,18 @@ const RegisterUserPage = () => {
   if(error) return <ErrorAlert message={error.message}/>
  
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = async (data: FormData) => {
+        try {
+            await registerUser(data);
+            showToast('Registeration successful', 'success')
+        } catch (e) {
+            if(e instanceof Error) {
+                showToast('Registration failed: ' + e.message, 'error');
+            }  else {
+                showToast('Registration failed: An unexpected error occurred', 'error');
+            }
+           
+        }
         console.log(data);
         // Here you would typically dispatch this data to a server or state management
       };
@@ -65,7 +77,7 @@ const RegisterUserPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
 
      
-        <div className="space-y-4">
+        <div className="space-y-4 text-secondary-content">
           <input 
           {...register('username')} 
             className="input input-bordered w-full" 
