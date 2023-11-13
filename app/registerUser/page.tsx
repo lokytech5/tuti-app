@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { z } from 'zod'
@@ -9,6 +9,8 @@ import useRegisterUser from '../hooks/useRegisterUser'
 import ErrorAlert from '../components/ErrorAlert'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { showToast } from '../components/ToastNotifier'
+import { useRouter } from 'next/navigation'
+import VerificationModal from '../components/VerificationModal'
 
 
 const schema = z.object({
@@ -21,19 +23,21 @@ type FormData = z.infer<typeof schema>;
 
 const RegisterUserPage = () => {
     const { register, handleSubmit, formState: { errors }} = useForm<FormData>({ resolver: zodResolver(schema),});
-
+    const router = useRouter();
     // Get the mutation function and state from your hook
   const { mutate: registerUser, isLoading, isError, error } = useRegisterUser();
-
-
-  if(isLoading) return <LoadingSpinner/>
-  if(error) return <ErrorAlert message={error.message}/>
- 
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
 
     const onSubmit = async (data: FormData) => {
-        try {
-            await registerUser(data);
-            showToast('Registeration successful', 'success')
+      try {
+            await registerUser(data, {
+                onSuccess: () => {
+                  // Show toast notification and redirect here
+                  showToast('Registration successful', 'success');
+                  setShowVerificationModal(true);
+                  console.log('Modal should show now');
+                },
+              });
         } catch (e) {
             if(e instanceof Error) {
                 showToast('Registration failed: ' + e.message, 'error');
@@ -45,6 +49,15 @@ const RegisterUserPage = () => {
         console.log(data);
         // Here you would typically dispatch this data to a server or state management
       };
+
+      if(isLoading) return <LoadingSpinner/>
+  if(error) return <ErrorAlert message={error.message}/>
+
+  const handleCloseModal = () => {
+    setShowVerificationModal(false);
+    router.push("/loginUser");
+  }
+  
 
 
   return (
@@ -74,7 +87,7 @@ const RegisterUserPage = () => {
     
       <div>
         <h2 className="text-3xl font-semibold mb-4 text-secondary-content">Welcome to TutiHairs</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
      
         <div className="space-y-4 text-secondary-content">
@@ -103,7 +116,7 @@ const RegisterUserPage = () => {
           />
           <p>{errors.password?.message as string || null}</p>
 
-          <button className="btn btn-primary w-full">Register</button>
+          <button type='submit' className="btn btn-primary w-full">Register</button>
           
         </div>
         </form>
@@ -111,6 +124,9 @@ const RegisterUserPage = () => {
       
     </div>
           </div>
+          <VerificationModal
+          isOpen={showVerificationModal} 
+          onClose={handleCloseModal}/>
         </div>
       )
   
