@@ -12,6 +12,7 @@ const Drawer = ({closeDrawer}: DrawerProps) => {
       {/* Sidebar content here */}
       <li onClick={closeDrawer}><Link href="/product">Product</Link></li>
       <li onClick={closeDrawer}><Link href="/registerUser">Register</Link></li>
+      <li onClick={closeDrawer}><Link href="/loginUser">Login</Link></li>
      
       
     </ul>

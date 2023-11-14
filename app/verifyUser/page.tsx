@@ -1,16 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import useUserStore from '../components/useUserStore';
-import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import useVerifyUser from '../hooks/useVerifyUser';
-import ErrorAlert from '../components/ErrorAlert';
-import { FaCheckCircle, FaTimesCircle, FaSpinner } from 'react-icons/fa';
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 const VerifyUserPage = () => {
-    const { isVerified, error, setIsVerified, setError } = useUserStore(state => ({
+    const { isVerified, error, } = useUserStore(state => ({
         isVerified: state.isVerified,
         error: state.error,
         setIsVerified: state.setIsVerified,
@@ -19,8 +16,7 @@ const VerifyUserPage = () => {
       const [loading, setLoading] = useState(true);
       const verifyUserMutation = useVerifyUser();   
       const searchParams = useSearchParams();  
-      const router = useRouter();
-
+  
       useEffect(() => {
         const tokenParam = searchParams.get('token');
     if (tokenParam) {

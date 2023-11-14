@@ -76,6 +76,7 @@ export interface LoginUserData {
 export interface LoginUserResponse {
   token: string;
   username: string;
+  _id: string;
 }
 
 // For the verify user functionality

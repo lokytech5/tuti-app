@@ -10,6 +10,7 @@ import ErrorAlert from '../components/ErrorAlert'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { showToast } from '../components/ToastNotifier'
 import { useRouter } from 'next/navigation'
+import { SubmitHandler } from 'react-hook-form';
 import VerificationModal from '../components/VerificationModal'
 
 
@@ -28,7 +29,8 @@ const RegisterUserPage = () => {
   const { mutate: registerUser, isLoading, isError, error } = useRegisterUser();
   const [showVerificationModal, setShowVerificationModal] = useState(false);
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit: SubmitHandler<FormData> = async (data, event) => {
+      event?.preventDefault();
       try {
             await registerUser(data, {
                 onSuccess: () => {

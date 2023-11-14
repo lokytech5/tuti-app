@@ -7,6 +7,7 @@ const DesktopMenu = () => {
     <ul className="menu menu-horizontal px-1">
       <li><Link href="/product">Product</Link></li>
       <li><Link href="/registerUser">Register</Link></li>
+      <li><Link href="/loginUser">Login</Link></li>
      
       
     </ul>
