@@ -8,7 +8,7 @@ const DesktopMenu = () => {
 
   return (
     <div className="hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
+    <ul className="menu menu-horizontal px-1 no-underline">
       <li><Link href="/product">Product</Link></li>
 
       {!isAuthenticated && (

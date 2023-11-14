@@ -31,16 +31,14 @@ const LoginPage = () => {
 
 
    const onSubmit: SubmitHandler<FormData> = (data, event) => {
-  event?.preventDefault();
+    event?.preventDefault();
         console.log('Form submitted', data);
         loginUser(data, {
           onSuccess: (response) => {
-            // Store the user's credentials in your Zustand store
             setUser({
-                _id: response._id, // You might want to adjust this based on actual response
+                _id: response._id,
               username: response.username,
             });
-            // Optionally, handle redirection or additional actions here
             localStorage.setItem('token', response.token);
             showToast('Login successful', 'success');
             router.push('/home')  
@@ -73,25 +71,25 @@ const LoginPage = () => {
             </div>
     
             <div>
-                <h2 className="text-3xl font-semibold mb-4 text-secondary-content">Login to TutiHairs</h2>
+                <h2 className="text-3xl font-semibold mb-4 text-secondary-content  md:ml-8 sm:ml-4">Login to TutiHairs</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-1/2 p-8 space-y-5">
                 <div className="space-y-4 text-secondary-content">
                     <input
                      {...register('username')}           
-                        className="input input-bordered w-full" 
+                        className="input input-bordered w-full sm:w-3/4 md:w-5/6 lg:w-96" 
                         type="text" 
                         placeholder="Username"
                     />{errors.username && <p className="text-red-500">{errors.username.message}</p>}
 
                     <input 
                      {...register('password')}
-                        className="input input-bordered w-full" 
+                        className="input input-bordered w-full sm:w-3/4 md:w-5/6 lg:w-96" 
                         type="password" 
                         placeholder="Password"
                     />
                     {errors.password && <p className="text-red-500">{errors.password.message}</p>}
            
-                    <button type="submit" className="btn btn-primary w-full" disabled={isLoading}>
+                    <button type="submit" className="btn btn-primary w-full md:w-5/6" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Log In'}
         </button>
                 </div>

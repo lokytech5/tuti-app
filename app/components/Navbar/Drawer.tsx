@@ -12,19 +12,22 @@ const Drawer = ({closeDrawer}: DrawerProps) => {
   return (
     <div className="drawer-side z-50">
     <label htmlFor="my-drawer-3" className="drawer-overlay"></label> 
-    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content flex flex-col justify-center items-center space-y-4 no-underline">
       {/* Sidebar content here */}
-      <li onClick={closeDrawer}><Link href="/product">Product</Link></li>
+      <li onClick={closeDrawer} className="text-center">
+        <Link href="/product">Product</Link></li>
       {!isAuthenticated && (
 
         <>
-        <li onClick={closeDrawer}><Link href="/registerUser">Register</Link></li>
-        <li onClick={closeDrawer}><Link href="/loginUser">Login</Link></li>  
+        <li onClick={closeDrawer} className="text-center"><Link href="/registerUser">Register</Link></li>
+        <li onClick={closeDrawer} className="text-center"><Link href="/loginUser">Login</Link></li>  
         </>
       )}
 
       {isAuthenticated && (
-        <LogoutButton/>
+       <li className="text-center">
+       <LogoutButton/>
+     </li>
       )}   
     </ul>
     
