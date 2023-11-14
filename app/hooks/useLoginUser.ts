@@ -24,8 +24,6 @@ const useLoginUser = () => {
             setUser({
               _id: data._id,
               username: data.username,
-              email: '',
-              isAdmin: false, 
             });
 
         // Store the token securely, e.g., in localStorage

@@ -39,8 +39,6 @@ const LoginPage = () => {
             setUser({
                 _id: response._id, // You might want to adjust this based on actual response
               username: response.username,
-              email: '', // You might want to adjust this based on actual response
-              isAdmin: false, // You might want to adjust this based on actual response
             });
             // Optionally, handle redirection or additional actions here
             localStorage.setItem('token', response.token);
