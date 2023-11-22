@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaTimes, FaTrashAlt } from "react-icons/fa";
 import Image from "next/image";
 import useCartStore from "./useCartStore";
+import useUserStore from "./useUserStore";
+import { useRouter } from "next/navigation";
 
 interface Props {
   isOpen: boolean;
@@ -12,14 +14,30 @@ const CartModal = ({ isOpen, onClose }: Props) => {
   const items = useCartStore((state) => state.items);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const calculateTotal = useCartStore((state) => state.calculateTotal);
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const router = useRouter();
+
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   const totalPrice = calculateTotal();
 
   if (!isOpen) return null;
 
   const onCheckOut = () => {
-    console.log("checkout");
+    if(!isAuthenticated) {
+      setShowLoginAlert(true);
+    } else {
+      onClose();
+      router.push('/checkout');
+    }
   };
+
+  useEffect(() => {
+    // Reset showLoginAlert when the user becomes authenticated
+    if (isAuthenticated) {
+      setShowLoginAlert(false);
+    }
+  }, [isAuthenticated]);
 
   return (
     <>
@@ -39,6 +57,23 @@ const CartModal = ({ isOpen, onClose }: Props) => {
           >
             <FaTimes />
           </button>
+
+          {showLoginAlert ? (
+            <div className="alert">
+              <p>Please log in to proceed to checkout.</p>
+              <button className="btn btn-primary" onClick={() => {
+                      // Close the modal before navigating
+                      onClose();
+                      router.push('/loginUser');
+                }}>
+                Log In
+              </button>
+              <button className="btn btn-secondary" onClick={() => setShowLoginAlert(false)}>
+                Cancel
+              </button>
+            </div>
+          ): (
+            <>
           <h3 className="font-bold text-lg">Your Cart</h3>
           {items.length === 0 && <p className="py-4">Your cart is empty.</p>}
           {items.map((item) => (
@@ -81,6 +116,11 @@ const CartModal = ({ isOpen, onClose }: Props) => {
               Total: #{totalPrice.toLocaleString()}
             </div>
           )}
+
+
+
+
+
           <div className="modal-action mt-4 flex flex-col md:flex-row justify-center md:justify-end">
             <button
               className="btn btn-primary self-center md:self-auto"
@@ -89,6 +129,9 @@ const CartModal = ({ isOpen, onClose }: Props) => {
               Proceed to Checkout
             </button>
           </div>
+         
+          </>
+           )}
         </div>
       </dialog>
     </>

@@ -18,15 +18,12 @@ const useLoginUser = () => {
         },
         {
           onSuccess: (data) => {
-            // Handle successful login, e.g., storing the token, updating user state, etc.
             const setUser = useUserStore.getState().setUser;
 
             setUser({
               _id: data._id,
               username: data.username,
             });
-
-        // Store the token securely, e.g., in localStorage
         localStorage.setItem('token', data.token);
           },
           onError: (error: AxiosError<LoginErrorResponse>) => {
