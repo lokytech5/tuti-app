@@ -4,6 +4,7 @@ import Image from "next/image";
 import useCartStore from "./useCartStore";
 import useUserStore from "./useUserStore";
 import { useRouter } from "next/navigation";
+import LoginAlert from "./LoginAlert";
 
 interface Props {
   isOpen: boolean;
@@ -32,12 +33,6 @@ const CartModal = ({ isOpen, onClose }: Props) => {
     }
   };
 
-  useEffect(() => {
-    // Reset showLoginAlert when the user becomes authenticated
-    if (isAuthenticated) {
-      setShowLoginAlert(false);
-    }
-  }, [isAuthenticated]);
 
   return (
     <>
@@ -59,19 +54,9 @@ const CartModal = ({ isOpen, onClose }: Props) => {
           </button>
 
           {showLoginAlert ? (
-            <div className="alert">
-              <p>Please log in to proceed to checkout.</p>
-              <button className="btn btn-primary" onClick={() => {
-                      // Close the modal before navigating
-                      onClose();
-                      router.push('/loginUser');
-                }}>
-                Log In
-              </button>
-              <button className="btn btn-secondary" onClick={() => setShowLoginAlert(false)}>
-                Cancel
-              </button>
-            </div>
+           <LoginAlert onClose={() => {
+             onClose();
+            setShowLoginAlert(false)}}/>
           ): (
             <>
           <h3 className="font-bold text-lg">Your Cart</h3>
