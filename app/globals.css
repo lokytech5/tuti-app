@@ -131,4 +131,13 @@ a:hover {
     text-decoration: none;
   }
 
-/* And so on for other classes based on your guidelines... */
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bg-color-1 { background-color: #f0f0f0; }
+  .bg-color-2 { background-color: #e0e0e0; }
+  .bg-color-3 { background-color: #d0d0d0; }
+  .bg-color-4 { background-color: #c0c0c0; }
+  

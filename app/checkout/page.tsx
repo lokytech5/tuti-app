@@ -2,7 +2,22 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import useCartStore from '../components/useCartStore';
-import ShippingCostCalculator from './ShippingCostCalculator';
+import ShippingForm from './ShippingForm';
+import { useForm, SubmitHandler, FormProvider, useFormContext } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { FaTrashAlt } from 'react-icons/fa';
+
+const shippingSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  address: z.string().min(1, "Address is required"),
+  city: z.string().min(1, "City is required"),
+  state: z.string().min(1, "State is required"),
+  postalCode: z.number().min(1, "Postal code is required"),
+  phone: z.string().min(1, "Phone is required"),
+});
+
+type ShippingFormData = z.infer<typeof shippingSchema>;
 
 const CheckoutPage = () => {
     const items = useCartStore((state) => state.items);
@@ -13,25 +28,26 @@ const CheckoutPage = () => {
   const [showPaystackButton, setShowPaystackButton] = useState(false);
   const [shippingCost, setShippingCost] = useState<number>(0);
 
-  // Handle form submission
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setFormError('');
-
-    // Implement form submission logic
-    // On success:
-    setIsSubmitting(false);
-    setShowPaystackButton(true);
-    // On error:
-    // setFormError('Error message');
-
-    // Redirect or show confirmation message
-  };
+  const methods = useForm<ShippingFormData>({
+    resolver: zodResolver(shippingSchema),
+  });
+  
+  const { handleSubmit } = useForm<ShippingFormData>();
 
   const handleShippingCostChange = (cost: number) => {
     setShippingCost(cost);
   }
+
+  const handleShippingFormSubmit = methods.handleSubmit((data) => {
+    setIsSubmitting(true);
+    setFormError('');
+
+    console.log(data);
+
+    setIsSubmitting(false);
+    setShowPaystackButton(true);
+    // On error: setFormError('Error message');
+});
 
   const finalTotalPrice = totalPrice + shippingCost;
   return (
@@ -42,7 +58,7 @@ const CheckoutPage = () => {
     ) : (
       <div>
         {items.map(item => (
-          <div key={item.product._id} className="flex flex-col md:flex-row items-center justify-between bg-base-200 p-4 my-2 rounded-lg shadow">
+          <div key={item.product._id} className="flex flex-col md:flex-row items-center justify-between bg-base-200 p-4 my-2 rounded-lg shadow mb-4">
             <div className="flex items-center mb-4 md:mb-0">
               <div className="w-24 h-24 relative mr-4">
                 <Image
@@ -61,50 +77,35 @@ const CheckoutPage = () => {
               </div>
             </div>
             <button className="btn btn-error btn-xs" onClick={() => {/* remove item logic */}}>
-              Remove
+              <FaTrashAlt/>
             </button>
           </div>
         ))}
-        <div className="flex justify-between items-center bg-base-200 p-4 my-2 rounded-lg shadow">
-          <h3 className="text-xl font-bold">Total:</h3>
-          <span className="text-xl font-bold">#{totalPrice.toLocaleString()}</span>
-        </div>
+          <FormProvider {...methods}>
+          <form onSubmit={handleShippingFormSubmit} className="mb-4">
+          <div className="card bg-color-2 p-4 my-2">
+               <ShippingForm onShippingCostChange={handleShippingCostChange} />
+           </div>
+                <button 
+                    type="submit" 
+                    className={`btn btn-primary mt-4 ${isSubmitting ? 'loading' : ''}`}
+                    disabled={isSubmitting}
+                >
+                    Place Order
+                </button>
+                {formError && <p className="text-red-500">{formError}</p>}
+            </form>
 
-        {/* Checkout Form */}
-        <div className="mt-6">
-          <h2 className="text-2xl font-bold mb-4">Shipping Information</h2>
-          <form>
-            <div className="form-group mb-4">
-              <label htmlFor="name" className="block mb-2">Full Name</label>
-              <input type="text" id="name" className="input input-bordered w-full" />
-            </div>
-            <div className="form-group mb-4">
-              <label htmlFor="address" className="block mb-2">Address</label>
-              <input type="text" id="address" className="input input-bordered w-full" />
-            </div>
 
-            <ShippingCostCalculator onShippingCostChange={handleShippingCostChange}/>
-            {/* Additional fields as needed */}
-            <button 
-          type="submit" 
-          className={`btn btn-primary mt-4 ${isSubmitting ? 'loading' : ''}`}
-          onClick={(e) => handleSubmit}
-          disabled={isSubmitting}
-        >
-          Place Order
-        </button>
-        {formError && <p className="text-red-500">{formError}</p>}
-          </form>
-        </div>
-
-        <div className="flex justify-between items-center bg-base-200 p-4 my-2 rounded-lg shadow">
-                <h3 className="text-xl font-bold">Total with Shipping:</h3>
-                <span className="text-xl font-bold">#{finalTotalPrice.toLocaleString()}</span>
-            </div>
+                  {/* Total Price Section */}
+                   <div className="text-right card bg-color-3 p-4 my-2">
+                        <div className="text-lg">Total: #{totalPrice.toLocaleString()}</div>
+                        <div className="text-xl font-bold mt-2">Total with Shipping: #{finalTotalPrice.toLocaleString()}</div>
+                    </div>
 
         {/* Payment Integration Placeholder */}
         {showPaystackButton && (
-        <div className="mt-6">
+        <div className="card bg-color-4 p-4 my-2 mt-6">
         <h2 className="text-2xl font-bold mb-4">Pay with Paystack</h2>
         <button 
           className={`btn btn-primary ${isSubmitting ? 'loading' : ''}`}
@@ -116,6 +117,7 @@ const CheckoutPage = () => {
         {formError && <p className="text-red-500">{formError}</p>}
       </div>
         )}
+        </FormProvider>
       </div>
     )}
   </div>
