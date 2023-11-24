@@ -57,30 +57,37 @@ const CheckoutPage = () => {
       <p>Your cart is empty.</p>
     ) : (
       <div>
-        {items.map(item => (
-          <div key={item.product._id} className="flex flex-col md:flex-row items-center justify-between bg-base-200 p-4 my-2 rounded-lg shadow mb-4">
-            <div className="flex items-center mb-4 md:mb-0">
-              <div className="w-24 h-24 relative mr-4">
-                <Image
-                  src={item.product.image}
-                  alt={item.product.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-lg"
-                />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold">{item.product.name}</h2>
-                <p>Qty: {item.quantity}</p>
-                <p>Price: #{item.product.price.toLocaleString()}</p>
-                {/* Additional product details */}
-              </div>
-            </div>
-            <button className="btn btn-error btn-xs" onClick={() => {/* remove item logic */}}>
-              <FaTrashAlt/>
-            </button>
-          </div>
-        ))}
+    {items.map(item => (
+  <div key={item.product._id} className="card card-bordered card-compact lg:card-normal shadow mb-4 bg-color-1 p-4 my-2">
+    <div className="card-body">
+      <div className="flex items-center">
+        <div className="w-24 h-24 relative mr-4">
+          <Image
+            src={item.product.image}
+            alt={item.product.name}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
+        <div>
+          <h2 className="card-title">{item.product.name}</h2>
+          {item.product.selectedColor && (
+            <p>Color: {item.product.selectedColor}</p>
+          )}
+          <p>Quantity: {item.quantity}</p>
+          <p className="text-lg font-bold">Price: #{item.product.price.toLocaleString()}</p>
+        </div>
+      </div>
+      <div className="card-actions justify-end">
+        <button className="btn btn-error btn-xs" onClick={() => {/* remove item logic */}}>
+          <FaTrashAlt/> Remove
+        </button>
+      </div>
+    </div>
+  </div>
+))}
+
           <FormProvider {...methods}>
           <form onSubmit={handleShippingFormSubmit} className="mb-4">
           <div className="card bg-color-2 p-4 my-2">

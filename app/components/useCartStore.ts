@@ -33,11 +33,13 @@ const useCartStore = create<CartState>((set, get) => ({
 
     addToCart: (product) =>
     set((state) => {
-      // Check if the cart already has the item with the same ID and selectedColor
-      const cartItemIndex = state.items.findIndex((item) =>
-        item.product._id === product._id &&
-        item.product.selectedColor === product.selectedColor // Check for color as well
-      );
+     // Define a unique identifier for each cart item
+     const cartItemId = product._id + (product.selectedColor ? `-${product.selectedColor}` : '');
+
+     // Find the index of the item in the cart
+     const cartItemIndex = state.items.findIndex((item) =>
+         item.product._id + (item.product.selectedColor ? `-${item.product.selectedColor}` : '') === cartItemId
+     );
       
       if (cartItemIndex > -1) {
         // Item already in cart, update quantity

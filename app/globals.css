@@ -136,8 +136,8 @@ a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .bg-color-1 { background-color: #f0f0f0; }
-  .bg-color-2 { background-color: #e0e0e0; }
-  .bg-color-3 { background-color: #d0d0d0; }
-  .bg-color-4 { background-color: #c0c0c0; }
+  .bg-color-1 { background-color: #f7fafc; }
+  .bg-color-2 { background-color: #e2e8f0; } 
+  .bg-color-3 { background-color: #cbd5e0; } 
+  .bg-color-4 { background-color: #a0aec0; }
   

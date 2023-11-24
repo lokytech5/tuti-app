@@ -16,11 +16,10 @@ const ShippingCostCalculator = ({onShippingCostChange}: Props) => {
         try {
             const cost = calculateShippingCost(shippingMethod, location);
             setShippingCost(cost);
-            onShippingCostChange(cost); // Update parent component
+            onShippingCostChange(cost);
         } catch (error) {
-            // Handle error (possibly update the parent component about the error)
             if (error instanceof Error) {
-                console.error(error.message); // Or update the parent component about the error
+                console.error(error.message);
             }
         }
     }, [shippingMethod, location, onShippingCostChange]);
