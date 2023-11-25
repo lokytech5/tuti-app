@@ -1,9 +1,11 @@
 import React from 'react'
-import ShippingCostCalculator from './ShippingCostCalculator';
+import ShippingCostCalculator, { ShippingMethod } from './ShippingCostCalculator';
 import { useFormContext } from 'react-hook-form';
   
   interface Props {
     onShippingCostChange: (cost: number) => void;
+    shippingMethod: ShippingMethod;
+    setShippingMethod: (method: ShippingMethod) => void;
   }
 
   const validStates = [
@@ -15,7 +17,7 @@ import { useFormContext } from 'react-hook-form';
   ];
   
 
-const ShippingForm = ({onShippingCostChange}: Props) => {
+const ShippingForm = ({onShippingCostChange, shippingMethod, setShippingMethod}: Props) => {
     const { register, formState: { errors } } = useFormContext();
 
   return (
@@ -88,7 +90,9 @@ const ShippingForm = ({onShippingCostChange}: Props) => {
         </div>
 
             <ShippingCostCalculator 
-            onShippingCostChange={onShippingCostChange}/>
+            onShippingCostChange={onShippingCostChange}
+            shippingMethod={shippingMethod}
+            setShippingMethod={setShippingMethod}/>
         </div>
    
   )

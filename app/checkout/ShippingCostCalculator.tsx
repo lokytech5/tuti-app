@@ -4,12 +4,13 @@ import { useFormContext } from 'react-hook-form';
 
 interface Props {
     onShippingCostChange: (cost: number) => void;
+    shippingMethod: ShippingMethod;
+    setShippingMethod: (method: ShippingMethod) => void;
 }
 
-type ShippingMethod = 'standard' | 'express';
+export type ShippingMethod = 'standard' | 'express';
 
-const ShippingCostCalculator = ({onShippingCostChange}: Props) => {
-    const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('standard');
+const ShippingCostCalculator = ({onShippingCostChange, shippingMethod, setShippingMethod}: Props) => {
     const [state, setState] = useState<string>('');
     const [shippingCost, setShippingCost] = useState<number>(0);
     const [error, setError] = useState<string>('');

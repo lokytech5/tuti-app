@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorAlert from '../components/ErrorAlert';
 
-const OrderSummary = () => {
+const OrderPage = () => {
     const searchParams = useSearchParams();
     const orderId = searchParams.get('orderId')
     const { data: order, isLoading, error } = useFetchOrder({ orderId });
@@ -59,4 +59,4 @@ const OrderSummary = () => {
   )
 }
 
-export default OrderSummary
+export default OrderPage

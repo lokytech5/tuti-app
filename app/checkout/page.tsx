@@ -11,6 +11,7 @@ import useCreateOrder from '../hooks/useCreateOrder';
 import { showToast } from '../components/ToastNotifier';
 import { useRouter } from 'next/navigation';
 import useUserStore from '../components/useUserStore';
+import { ShippingMethod } from './ShippingCostCalculator';
 
 const shippingSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -31,7 +32,7 @@ const CheckoutPage = () => {
     const totalPrice = calculateTotal();
     const [isSubmitting, setIsSubmitting] = useState(false); // State for form submission
   const [formError, setFormError] = useState(''); // State for form error
-  // const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('standard');
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('standard');
   const user = useUserStore.getState().user; 
  
   const [shippingCost, setShippingCost] = useState<number>(0);
@@ -41,8 +42,6 @@ const CheckoutPage = () => {
   const methods = useForm<ShippingFormData>({
     resolver: zodResolver(shippingSchema),
   });
-  
-  const { handleSubmit } = useForm<ShippingFormData>();
 
   const createOrder = useCreateOrder();
 
@@ -69,14 +68,14 @@ const CheckoutPage = () => {
         state: data.state,
         postalCode: data.postalCode.toString(), // Convert postalCode to a string
         phone: data.phone,
-        // method: shippingMethod
+        method: shippingMethod
     }
     };
 
     createOrder.mutate(orderData, {
       onSuccess: (response) => {
         showToast('Order created successfully!', 'success');
-        router.push(`/orderSummary/${response.id}`);
+        router.push(`/order/${response.id}`);
         console.log('Order created successfully:', response);
       
         // Additional success handling (e.g., redirect to a success page)
@@ -134,7 +133,9 @@ const CheckoutPage = () => {
           <form onSubmit={methods.handleSubmit(onSubmit)} className="mb-4">
           <div className="card bg-color-2 p-4 my-2">
                <ShippingForm 
-               onShippingCostChange={handleShippingCostChange} />
+               onShippingCostChange={handleShippingCostChange}
+               shippingMethod={shippingMethod}
+               setShippingMethod={setShippingMethod}  />
            </div>
                 <button 
                     type="submit" 
