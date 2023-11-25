@@ -4,56 +4,83 @@ import useFetchOrder from '../hooks/useFetchOrder';
 import { useSearchParams } from 'next/navigation';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorAlert from '../components/ErrorAlert';
+import { OrderCreationResponse } from '../components/types';
+import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
 
-const OrderPage = () => {
+interface Props {
+    order: OrderCreationResponse;
+}
+
+const OrderPage = ({order}: Props) => {
     const searchParams = useSearchParams();
     const orderId = searchParams.get('orderId')
-    const { data: order, isLoading, error } = useFetchOrder({ orderId });
+   
     const [isButtonLoading, setIsButtonLoading] = useState(false);
 
-    if(isLoading) return <LoadingSpinner/>
-    if(error) return <ErrorAlert message={error.message}/>
+   
 
     const handlePayment = () => {
         setIsButtonLoading(true);
         // Implement payment logic here
     }
 
+    //  const getStatusBadge = () => {
+    //     switch (order.status) {
+    //         case 'pending':
+    //             return <span className="badge badge-warning">Pending</span>;
+    //         case 'completed':
+    //             return <span className="badge badge-success">Completed</span>;
+    //         case 'error':
+    //             return <span className="badge badge-error">Error</span>;
+    //         default:
+    //             return <span className="badge badge-info">Info</span>;
+    //     }
+    // };
+
   return (
-    <div>
-      <h1>Order Summary</h1>
-      {order && (
-                <div>
-                    <h2>Order ID: {order.id}</h2>
-                    <p>User: {order.user.name} ({order.user.email})</p>
-                    <p>Status: {order.status}</p>
-                    <p>Order Date: {order.orderDate}</p>
-                    <p>Total Price: {order.totalPrice}</p>
-                    <h3>Shipping Details:</h3>
+    <div className='container mx-auto p-4 text-secondary-content'>
+            <h1 className="text-4xl font-bold text-center my-6">Order Summary</h1>
+
+            <div className="flex flex-col md:flex-row justify-around items-center mb-6">
+                <div className="card bg-white shadow-lg rounded-lg p-6 m-2 w-full md:w-1/3">
+                    <h2 className="text-2xl font-semibold flex items-center"><FaBoxOpen className="mr-2"/> Order Details</h2>
+                    <p><strong>ID:</strong> {order.id}</p>
+                    <p><strong className="badge badge-warning">Status:</strong> {order.status}</p>
+                    <p><strong>Date:</strong> {order.orderDate}</p>
+                    <p><strong>Total:</strong> ${order.totalPrice}</p>
+                </div>
+
+                <div className="card bg-white shadow-lg rounded-lg p-6 m-2 w-full md:w-1/3">
+                    <h2 className="text-2xl font-semibold flex items-center"><FaShippingFast className="mr-2"/> Shipping Info</h2>
                     <p>{order.shipping.name}</p>
                     <p>{order.shipping.address}</p>
                     <p>{order.shipping.city}, {order.shipping.state} {order.shipping.postalCode}</p>
                     <p>Phone: {order.shipping.phone}</p>
-                    <h3>Items:</h3>
-                    <ul>
-                        {order.items.map(item => (
-                            <li key={item.id}>
-                                {item.product.name} - Quantity: {item.quantity}
-                            </li>
-                        ))}
-                    </ul>
                 </div>
-            )}
+            </div>
 
-        <div className="card bg-color-4 p-4 my-2 mt-6">
-                <h2 className="text-2xl font-bold mb-4">Pay with Paystack</h2>
-                <button 
-                    className={`btn btn-primary ${isButtonLoading ? 'loading' : ''}`}
-                    onClick={handlePayment}
-                    disabled={isButtonLoading}
-                >
-                    Pay Now
-                </button>
+            <div className="card bg-white shadow-lg rounded-lg p-6 my-6">
+                <h2 className="text-2xl font-semibold mb-4">Items Ordered</h2>
+                <ul>
+                    {order.items.map(item => (
+                        <li key={item.id} className="border-b border-gray-200 py-2">
+                            {item.product.name} - <span className="font-semibold">Qty:</span> {item.quantity}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="flex justify-center">
+                <div className="card bg-color-4 p-4 shadow-lg rounded-lg">
+                    <h2 className="text-2xl font-bold mb-4 flex items-center justify-center"><FaCreditCard className="mr-2"/> Payment</h2>
+                    <button 
+                        className={`btn btn-primary ${isButtonLoading ? 'loading' : ''}`}
+                        onClick={handlePayment}
+                        disabled={isButtonLoading}
+                    >
+                        Pay ${order.totalPrice} Now
+                    </button>
+                </div>
             </div>
         </div>
   )

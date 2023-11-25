@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
-import { apiClient } from '../components/services/api-client';
+import { authApiClient } from '../components/services/api-client';
 import { OrderCreationResponse } from '../components/types';
 
 interface Props {
@@ -13,7 +13,7 @@ const useFetchOrder = ({orderId}: Props) => {
             return Promise.reject(new Error("Order ID is undefined."));
     }   
 
-    return apiClient.get<OrderCreationResponse>(`/orders/${orderId}`).then(res => res.data);
+    return authApiClient.get<OrderCreationResponse>(`/orders/by/${orderId}`).then(res => res.data);
 }
     return useQuery<OrderCreationResponse, Error>(['order', orderId], fetchOrderDetails);
 }
