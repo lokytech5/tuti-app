@@ -1,44 +1,52 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react'
+import apiClient from '../components/services/api-client';
+import { AxiosError } from 'axios';
+import { OrderCreationResponse } from '../components/types';
 
-interface ErrorResponse {
+interface OrderCreationData {
+    items: Array<{
+      product: string;
+      quantity: number;
+      selectedColor?: string | null;
+    }>;
+    shipping: {
+      cost: number;
+      address: string;
+      city: string;
+      state: string;
+      postalCode: string;
+      phone: string;
+    };
+  }
+
+interface OrderCreationErrorResponse {
     error?: string;
     errors?: { msg: string }[];
     message?: string;
-  }
+}
 
-
-
-const prepareDataForBackend = (items, shippingData) => {
-    return {
-        items: items.map(item => ({
-            product: item.product._id,
-            quantity: item.quantity,
-            selectedColor: item.product.selectedColor || null
-        })),
-        shipping: {
-            ...shippingData,
-            cost: shippingData.cost
-        }
-    };
-};
-
-// Function to post data to the backend
-const createOrder = async (data) => {
-    const response = await axios.post('/api/orders', data);
-    return response.data;
-};
 
 const useCreateOrder = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation(createOrder, {
-        onSuccess: () => {
-            // Invalidate and refetch any queries that depend on the orders data
-            queryClient.invalidateQueries('orders');
+    return useMutation<OrderCreationResponse, AxiosError<OrderCreationErrorResponse>, OrderCreationData>(
+        (orderData: OrderCreationData) => {
+          return apiClient.post<OrderCreationResponse>('/orders/', orderData)
+            .then(response => response.data);
         },
-        // You can add onError and onMutate if needed
-    });
-}
+        {
+            onSuccess: (data) => {
+              // Handle success scenario
+              console.log('Order created successfully:', data);
+            },
+            onError: (error: AxiosError<OrderCreationErrorResponse>) => {
+              // Handle error scenario
+              const errorMessage = error.response?.data?.errors 
+              ? error.response.data.errors.map(e => e.msg).join(', ')
+              : error.response?.data?.error ?? 'An unexpected error occurred';
+              console.error('Order creation failed:', errorMessage);   
+            },
+          }
+        );
+      }
 
 export default useCreateOrder

@@ -5,6 +5,14 @@ import { useFormContext } from 'react-hook-form';
   interface Props {
     onShippingCostChange: (cost: number) => void;
   }
+
+  const validStates = [
+    'Adamawa', 'Kaduna', 'Niger', 'Jigawa', 'Plateau', 'Gombe', 'Sokoto', 
+    'Kano', 'Kebbi', 'Bauchi', 'Nasarawa', 'Borno', 'Yobe', 'Kwara', 
+    'Kogi', 'Taraba', 'Benue', 'Katsina', 'Zamfara', 'Akwa Ibom', 'Bayelsa', 
+    'Cross River', 'Delta', 'Edo', 'Ekiti', 'Rivers', 'Abia', 'Ebonyi', 
+    'Anambra', 'Enugu', 'Imo', 'Lagos', 'Ogun', 'Ondo', 'Osun', 'Oyo'
+  ];
   
 
 const ShippingForm = ({onShippingCostChange}: Props) => {
@@ -13,7 +21,6 @@ const ShippingForm = ({onShippingCostChange}: Props) => {
   return (
     <div className="mt-6">
           <h2 className="text-2xl font-bold mb-4">Shipping Information</h2>
-          <form>
 
           <div className="form-group mb-4">
             <label htmlFor="name" className="block mb-2">Name</label>
@@ -46,20 +53,25 @@ const ShippingForm = ({onShippingCostChange}: Props) => {
         </div>
 
         <div className="form-group mb-4">
-            <label htmlFor="state" className="block mb-2">State</label>
-            <input 
-            {...register('state')}
-            type="text" 
-            id="state" 
-            className="input input-bordered w-full" required />
-            <p>{errors.state?.message as string || null}</p>
-        </div>
+        <label htmlFor="state" className="block mb-2">State</label>
+        <select 
+          id="state" 
+          className="select select-bordered w-full" 
+          {...register('state')}
+          required
+        >
+          {validStates.map(state => (
+            <option key={state} value={state}>{state}</option>
+          ))}
+        </select>
+        <p>{errors.state?.message as string || null}</p>
+      </div>
 
         <div className="form-group mb-4">
             <label htmlFor="postalCode" className="block mb-2">Postal Code</label>
             <input 
               {...register('postalCode')}
-            type="number" 
+            type="text" 
             id="postalCode" 
             className="input input-bordered w-full" required />
              <p>{errors.postalCode?.message as string || null}</p>
@@ -75,8 +87,8 @@ const ShippingForm = ({onShippingCostChange}: Props) => {
              <p>{errors.phone?.message as string || null}</p>
         </div>
 
-            <ShippingCostCalculator onShippingCostChange={onShippingCostChange}/>
-          </form>
+            <ShippingCostCalculator 
+            onShippingCostChange={onShippingCostChange}/>
         </div>
    
   )

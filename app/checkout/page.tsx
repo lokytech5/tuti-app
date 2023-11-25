@@ -7,13 +7,18 @@ import { useForm, SubmitHandler, FormProvider, useFormContext } from 'react-hook
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { FaTrashAlt } from 'react-icons/fa';
+import useCreateOrder from '../hooks/useCreateOrder';
+import { showToast } from '../components/ToastNotifier';
+import { useRouter } from 'next/navigation';
 
 const shippingSchema = z.object({
   name: z.string().min(1, "Name is required"),
   address: z.string().min(1, "Address is required"),
   city: z.string().min(1, "City is required"),
   state: z.string().min(1, "State is required"),
-  postalCode: z.number().min(1, "Postal code is required"),
+  postalCode: z.string()
+  .min(1, "Postal code is required")
+  .regex(/^\d+$/, "Postal code must be numeric"),
   phone: z.string().min(1, "Phone is required"),
 });
 
@@ -25,8 +30,10 @@ const CheckoutPage = () => {
     const totalPrice = calculateTotal();
     const [isSubmitting, setIsSubmitting] = useState(false); // State for form submission
   const [formError, setFormError] = useState(''); // State for form error
-  const [showPaystackButton, setShowPaystackButton] = useState(false);
+ 
   const [shippingCost, setShippingCost] = useState<number>(0);
+
+  const router = useRouter();
 
   const methods = useForm<ShippingFormData>({
     resolver: zodResolver(shippingSchema),
@@ -34,20 +41,50 @@ const CheckoutPage = () => {
   
   const { handleSubmit } = useForm<ShippingFormData>();
 
+  const createOrder = useCreateOrder();
+
   const handleShippingCostChange = (cost: number) => {
     setShippingCost(cost);
   }
 
-  const handleShippingFormSubmit = methods.handleSubmit((data) => {
+  const onSubmit = (data: ShippingFormData) => {
     setIsSubmitting(true);
     setFormError('');
 
-    console.log(data);
+    const orderData = {
+      items: items.map(item => ({
+        product: item.product._id,
+        quantity: item.quantity,
+        selectedColor: item.product.selectedColor || null
+      })),
+      shipping: {
+        cost: shippingCost,
+        name: data.name,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        postalCode: data.postalCode.toString(), // Convert postalCode to a string
+        phone: data.phone
+    }
+    };
+
+    createOrder.mutate(orderData, {
+      onSuccess: (response) => {
+        showToast('Order created successfully!', 'success');
+        router.push(`/orderSummary/${response.id}`);
+        console.log('Order created successfully:', response);
+      
+        // Additional success handling (e.g., redirect to a success page)
+      },
+      onError: (error) => {
+        setFormError(error.response?.data?.error || 'An unexpected error occurred');
+      }
+    });
 
     setIsSubmitting(false);
-    setShowPaystackButton(true);
+   
     // On error: setFormError('Error message');
-});
+};
 
   const finalTotalPrice = totalPrice + shippingCost;
   return (
@@ -89,7 +126,7 @@ const CheckoutPage = () => {
 ))}
 
           <FormProvider {...methods}>
-          <form onSubmit={handleShippingFormSubmit} className="mb-4">
+          <form onSubmit={methods.handleSubmit(onSubmit)} className="mb-4">
           <div className="card bg-color-2 p-4 my-2">
                <ShippingForm onShippingCostChange={handleShippingCostChange} />
            </div>
@@ -109,21 +146,7 @@ const CheckoutPage = () => {
                         <div className="text-lg">Total: #{totalPrice.toLocaleString()}</div>
                         <div className="text-xl font-bold mt-2">Total with Shipping: #{finalTotalPrice.toLocaleString()}</div>
                     </div>
-
-        {/* Payment Integration Placeholder */}
-        {showPaystackButton && (
-        <div className="card bg-color-4 p-4 my-2 mt-6">
-        <h2 className="text-2xl font-bold mb-4">Pay with Paystack</h2>
-        <button 
-          className={`btn btn-primary ${isSubmitting ? 'loading' : ''}`}
-          
-          disabled={isSubmitting}
-        >
-          Pay Now
-        </button>
-        {formError && <p className="text-red-500">{formError}</p>}
-      </div>
-        )}
+        
         </FormProvider>
       </div>
     )}

@@ -87,3 +87,41 @@ export interface VerifyUserRequest {
 export interface VerifyUserResponse {
   message: string;
 }
+
+export interface OrderItem {
+  id: string;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+  };
+  quantity: number;
+  subtotal: number;
+}
+
+export interface OrderShipping {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  postalCode: number | string;
+  phone: string;
+  method: string;
+  cost: number;
+}
+
+export interface OrderUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface OrderCreationResponse {
+  id: string;
+  user: OrderUser;
+  items: OrderItem[];
+  totalPrice: number;
+  status: string;
+  orderDate: string; // or Date if you want to convert it to a Date object
+  shipping: OrderShipping;
+}
