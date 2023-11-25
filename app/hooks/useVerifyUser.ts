@@ -3,7 +3,7 @@ import useUserStore from '../components/useUserStore';
 import { useMutation } from '@tanstack/react-query';
 import { VerifyUserRequest, VerifyUserResponse } from '../components/types';
 import { AxiosError } from 'axios';
-import apiClient from '../components/services/api-client';
+import { apiClient } from '../components/services/api-client';
 
 interface VerifyErrorResponse {
     message?: string;

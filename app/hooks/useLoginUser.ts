@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { LoginUserData, LoginUserResponse } from '../components/types';
 import { AxiosError } from 'axios';
-import apiClient from '../components/services/api-client';
+import { apiClient } from '../components/services/api-client';
 import useUserStore from '../components/useUserStore';
 
 interface LoginErrorResponse {

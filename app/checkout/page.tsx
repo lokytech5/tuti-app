@@ -10,6 +10,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import useCreateOrder from '../hooks/useCreateOrder';
 import { showToast } from '../components/ToastNotifier';
 import { useRouter } from 'next/navigation';
+import useUserStore from '../components/useUserStore';
 
 const shippingSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -30,6 +31,8 @@ const CheckoutPage = () => {
     const totalPrice = calculateTotal();
     const [isSubmitting, setIsSubmitting] = useState(false); // State for form submission
   const [formError, setFormError] = useState(''); // State for form error
+  // const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('standard');
+  const user = useUserStore.getState().user; 
  
   const [shippingCost, setShippingCost] = useState<number>(0);
 
@@ -52,6 +55,7 @@ const CheckoutPage = () => {
     setFormError('');
 
     const orderData = {
+       user: user?._id,
       items: items.map(item => ({
         product: item.product._id,
         quantity: item.quantity,
@@ -64,7 +68,8 @@ const CheckoutPage = () => {
         city: data.city,
         state: data.state,
         postalCode: data.postalCode.toString(), // Convert postalCode to a string
-        phone: data.phone
+        phone: data.phone,
+        // method: shippingMethod
     }
     };
 
@@ -128,7 +133,8 @@ const CheckoutPage = () => {
           <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} className="mb-4">
           <div className="card bg-color-2 p-4 my-2">
-               <ShippingForm onShippingCostChange={handleShippingCostChange} />
+               <ShippingForm 
+               onShippingCostChange={handleShippingCostChange} />
            </div>
                 <button 
                     type="submit" 

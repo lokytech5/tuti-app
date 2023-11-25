@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { RegisterUserData, RegisterUserResponse } from '../components/types';
-import apiClient from '../components/services/api-client';
+import { apiClient } from '../components/services/api-client';
 import { AxiosError } from 'axios';
 import useUserStore from '../components/useUserStore';
 

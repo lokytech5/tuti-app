@@ -42,12 +42,7 @@ const ShippingCostCalculator = ({onShippingCostChange}: Props) => {
             <option value="express">Express</option>
         </select>
     </div>
-    {/* <div className="form-group mb-4">
-        <label htmlFor="location" className="block mb-2">State</label>
-        <input type="text" id="location" className="input input-bordered w-full"
-               onChange={(e) => setState(e.target.value)} />
-    </div>
-    {error && <p className="text-red-500">{error}</p>} */}
+   
     <div className="flex justify-between items-center bg-base-200 p-4 my-2 rounded-lg shadow">
         <h3 className="text-xl font-bold">Shipping Cost:</h3>
         <span className="text-xl font-bold">#{shippingCost.toLocaleString()}</span>

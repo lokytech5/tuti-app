@@ -1,5 +1,5 @@
 import React from 'react'
-import apiClient from '../components/services/api-client';
+import {apiClient} from '../components/services/api-client';
 import { useQuery } from '@tanstack/react-query';
 
 const useCurated = (endpoint = '/curatedCollection') => {

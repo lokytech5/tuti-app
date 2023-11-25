@@ -5,16 +5,19 @@ const apiClient = axios.create({
     baseURL: 'http://localhost:5001/api'
 });
 
-apiClient.interceptors.request.use((config) => {
-    if (config.headers.applyAuthToken) {
-        const token = localStorage.getItem('token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
+// Authenticated client
+const authApiClient = axios.create({
+    baseURL: 'http://localhost:5001/api'
+});
+
+authApiClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 }, (error) => {
     return Promise.reject(error);
 });
 
-export default apiClient;
+export { apiClient, authApiClient };

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
-import apiClient from '../components/services/api-client';
+import { apiClient } from '../components/services/api-client';
 import { OrderCreationResponse } from '../components/types';
 
 interface Props {

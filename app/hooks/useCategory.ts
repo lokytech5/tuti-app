@@ -1,4 +1,4 @@
-import apiClient from '../components/services/api-client';
+import { apiClient } from '../components/services/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { CategoryResponse } from '../components/types';
 

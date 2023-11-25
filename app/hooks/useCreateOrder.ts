@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react'
-import apiClient from '../components/services/api-client';
+import { authApiClient } from '../components/services/api-client';
 import { AxiosError } from 'axios';
 import { OrderCreationResponse } from '../components/types';
 
@@ -30,7 +30,7 @@ interface OrderCreationErrorResponse {
 const useCreateOrder = () => {
     return useMutation<OrderCreationResponse, AxiosError<OrderCreationErrorResponse>, OrderCreationData>(
         (orderData: OrderCreationData) => {
-          return apiClient.post<OrderCreationResponse>('/orders/', orderData)
+          return authApiClient.post<OrderCreationResponse>('/orders/', orderData)
             .then(response => response.data);
         },
         {
