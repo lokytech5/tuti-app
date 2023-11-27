@@ -7,6 +7,10 @@ interface VerifyTransactionData {
     reference: string;
 }
 
+interface TransactionResponse {
+    
+}
+
 const useVerifyTransaction = () => {
     return useMutation<TransactionResponse, AxiosError, VerifyTransactionData>(
         async ({ reference }: VerifyTransactionData) => {

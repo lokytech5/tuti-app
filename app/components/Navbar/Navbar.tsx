@@ -8,10 +8,12 @@ import Cart from './Cart'
 import Link from 'next/link'
 import ThemeToggle from './ThemeToggle'
 import CartModal from '../CartModal'
+import useUserStore from '../useUserStore'
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
 
 
   return (
@@ -30,7 +32,7 @@ const Navbar = () => {
        <DesktopMenu/>
     <div className="flex-none">
     <Cart onCartClick={() => setIsCartModalOpen(true)}/> 
-        <UserMenu/>
+        {isAuthenticated && <UserMenu/> }   
     </div>
   </div>
   </div>

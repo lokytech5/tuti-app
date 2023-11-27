@@ -122,6 +122,29 @@ export interface OrderCreationResponse {
   items: OrderItem[];
   totalPrice: number;
   status: string;
-  orderDate: string; // or Date if you want to convert it to a Date object
+  orderDate: string;
   shipping: OrderShipping;
 }
+
+export interface NotificationPreferences {
+  emailNotifications: boolean;
+  pushNotifications: boolean;
+}
+
+export interface UserProfile {
+  notificationPreferences: NotificationPreferences;
+  _id: string;
+  email: string;
+  resetPasswordToken: string | null;
+  username: string;
+  avatar: string | null;
+  isVerified: boolean;
+  emailVerificationToken: string;
+  isAdmin: boolean;
+  __v: number;
+}
+
+export interface UserProfileResponse {
+  user: UserProfile;
+}
+

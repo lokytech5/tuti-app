@@ -3,7 +3,7 @@ import imgWoman from '../../../public/next.svg'
 import Image from 'next/image'
 const UserMenu = () => {
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-end text-secondary-content">
     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
       <div className="w-10 rounded-full">
         <Image src={imgWoman} alt="Picture of a woman" />
