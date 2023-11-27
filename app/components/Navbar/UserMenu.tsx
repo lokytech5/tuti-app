@@ -1,6 +1,7 @@
 import React from 'react'
 import imgWoman from '../../../public/next.svg'
 import Image from 'next/image'
+import Link from 'next/link'
 const UserMenu = () => {
   return (
     <div className="dropdown dropdown-end text-secondary-content">
@@ -10,12 +11,10 @@ const UserMenu = () => {
       </div>
     </label>
     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-      <li>
-        <a className="justify-between">
+      <Link href={'/userProfile'}>
           Profile
           <span className="badge">New</span>
-        </a>
-      </li>
+      </Link>
       <li><a>Settings</a></li>
       <li><a>Logout</a></li>
     </ul>
