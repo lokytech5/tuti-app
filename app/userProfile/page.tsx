@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorAlert from '../components/ErrorAlert';
 import defaultAvatar from '../../public/images/avatar.png';
 import Image from 'next/image';
+import UpdateProfileForm from './UpdateProfileForm';
 
 const UserProfile = () => {
     const { data: userProfile, isLoading, isError, error } = useUserProfile();
@@ -13,7 +14,11 @@ const UserProfile = () => {
 
     const avatarSrc = user?.avatar ? user.avatar : defaultAvatar;
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [editMode, setEditMode] = useState(false);
+
+    const handleEditToggle = () => {
+        setEditMode(!editMode);
+    };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // setSelectedFile(e.target.files[0]);
@@ -23,46 +28,66 @@ const UserProfile = () => {
     // Use your uploadAvatar hook to upload the selected file
   };
 
-  const handleEditProfile = () => {
-    // Redirect to UpdateProfile component or open a modal for editing
-  };
 
     if(isLoading) return <LoadingSpinner/>
     if(isError) return <ErrorAlert message={error.message}/>
   return (
-    <div className="card card-bordered w-full max-w-lg mx-auto bg-base-100 shadow-xl text-secondary-content">
-    <figure className="px-4 md:px-10 pt-10">
-      <Image src={avatarSrc} alt="User Avatar" className="rounded-full w-20 h-20 md:w-24 md:h-24" width={80} height={80} />
-    </figure> 
-    <div className="card-body items-center text-center">
-      <h2 className="card-title">{user?.username}</h2>
-      <p><strong>Email:</strong> {user?.email}</p>
-      <p>{user?.isVerified ? "Email Verified" : "Email Not Verified"}</p>
-      
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">{user?.notificationPreferences.emailNotifications ? "Email Notifications: On" : "Email Notifications: Off"}</div>
-        <div className="badge badge-outline">{user?.notificationPreferences.pushNotifications ? "Push Notifications: On" : "Push Notifications: Off"}</div>
-      </div>
+    <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
+                <div>
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">User Profile</h3>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and preferences.</p>
+                </div>
+                
+                {/* <button onClick={() => setEditMode(!editMode)} className="btn btn-primary">
+                    {editMode ? 'Cancel' : 'Edit Profile'}
+                </button> */}
+            </div>
+            <div className="px-4 py-5 sm:px-6">
+                <div className="flex  sm:flex-row items-center space-x-6">
+                    <Image src={avatarSrc} alt="User Avatar" className="h-24 w-24 rounded-full" />
+                    <div>
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">Avatar</h3>
+                        <p className="mt-1 max-w-2xl text-sm text-gray-500">Your profile picture.</p>
+                        <div className="mt-4 flex">
+                            <input type="file" onChange={handleFileChange} className="form-input mb-2 sm:mb-0 sm:mr-4" />
+                            <button onClick={handleAvatarUpload} className="ml-4 btn btn-secondary sm:ml-4">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="border-t border-gray-200">
+                <dl>
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt className="text-sm font-medium text-gray-500">Full name</dt>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{user?.username}</dd>
+                    </div>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt className="text-sm font-medium text-gray-500">Email address</dt>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{user?.email}</dd>
+                    </div>
+                    {/* Additional user details can be added here */}
+                </dl>
+            </div>
 
-      {/* Avatar Upload */}
-      <div className="card-body">
-        <input type="file" onChange={handleFileChange} />
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" onClick={handleAvatarUpload}>Upload Avatar</button>
-      </div>
 
-      {/* Notification Toggles */}
-      <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text">Email Notifications</span>
-          <input type="checkbox" checked={user?.notificationPreferences.emailNotifications} className="toggle" />
-        </label>
-      </div>
+            
 
-      <div className="card-actions">
-        <button className="btn btn-primary">Edit Profile</button>
-      </div>
+            {user && <UpdateProfileForm user={user} />}
+            <div className="mt-6 text-secondary-content">
+        <h3 className="text-lg font-semibold mb-2">Notification Preferences</h3>
+        <div className="flex items-center justify-start gap-4">
+            <label className="flex items-center gap-2">
+                <input type="checkbox" checked={user?.notificationPreferences.emailNotifications} readOnly className="checkbox checkbox-primary" />
+                <span>Email Notifications</span>
+            </label>
+            <label className="flex items-center gap-2">
+                <input type="checkbox" checked={user?.notificationPreferences.pushNotifications} readOnly className="checkbox checkbox-primary" />
+                <span>Push Notifications</span>
+            </label>
+        </div>
     </div>
-  </div>
+        </div>
 
   )
 }

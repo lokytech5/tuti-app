@@ -142,10 +142,21 @@ export interface UserProfile {
   emailVerificationToken: string;
   isAdmin: boolean;
   __v: number;
+  profile?: {
+    firstName: string;
+    lastName: string;
+    phone: string;
+  };
 }
 
 export interface UserProfileResponse {
   user: UserProfile;
+}
+
+export interface UpdateProfileRequest {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
 }
 
 
