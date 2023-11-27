@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image';
 import useCartStore from '../components/useCartStore';
 import ShippingForm from './ShippingForm';
-import { useForm, SubmitHandler, FormProvider, useFormContext } from 'react-hook-form';
+import { useForm, FormProvider} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -76,9 +76,6 @@ const CheckoutPage = () => {
       onSuccess: (response) => {
         showToast('Order created successfully!', 'success');
         router.push(`/order/${response.id}`);
-        console.log('Order created successfully:', response);
-      
-        // Additional success handling (e.g., redirect to a success page)
       },
       onError: (error) => {
         setFormError(error.response?.data?.error || 'An unexpected error occurred');
@@ -86,8 +83,6 @@ const CheckoutPage = () => {
     });
 
     setIsSubmitting(false);
-   
-    // On error: setFormError('Error message');
 };
 
   const finalTotalPrice = totalPrice + shippingCost;

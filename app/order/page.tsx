@@ -1,9 +1,5 @@
 "use client"
 import React, { useState } from 'react'
-import useFetchOrder from '../hooks/useFetchOrder';
-import { useSearchParams } from 'next/navigation';
-import LoadingSpinner from '../components/LoadingSpinner';
-import ErrorAlert from '../components/ErrorAlert';
 import { OrderCreationResponse } from '../components/types';
 import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
 
@@ -11,10 +7,7 @@ interface Props {
     order: OrderCreationResponse;
 }
 
-const OrderPage = ({order}: Props) => {
-    const searchParams = useSearchParams();
-    const orderId = searchParams.get('orderId')
-   
+const OrderPage = ({order}: Props) => { 
     const [isButtonLoading, setIsButtonLoading] = useState(false);
 
    
@@ -47,7 +40,7 @@ const OrderPage = ({order}: Props) => {
                     <p><strong>ID:</strong> {order.id}</p>
                     <p><strong className="badge badge-warning">Status:</strong> {order.status}</p>
                     <p><strong>Date:</strong> {order.orderDate}</p>
-                    <p><strong>Total:</strong> ${order.totalPrice}</p>
+                    <p><strong>Total:</strong> #{order.totalPrice.toLocaleString()}</p>
                 </div>
 
                 <div className="card bg-white shadow-lg rounded-lg p-6 m-2 w-full md:w-1/3">
@@ -78,7 +71,7 @@ const OrderPage = ({order}: Props) => {
                         onClick={handlePayment}
                         disabled={isButtonLoading}
                     >
-                        Pay ${order.totalPrice} Now
+                        Pay #{order.totalPrice.toLocaleString()} Now
                     </button>
                 </div>
             </div>
