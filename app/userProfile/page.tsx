@@ -44,18 +44,18 @@ const UserProfile = () => {
                 </button> */}
             </div>
             <div className="px-4 py-5 sm:px-6">
-                <div className="flex  sm:flex-row items-center space-x-6">
-                    <Image src={avatarSrc} alt="User Avatar" className="h-24 w-24 rounded-full" />
-                    <div>
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">Avatar</h3>
-                        <p className="mt-1 max-w-2xl text-sm text-gray-500">Your profile picture.</p>
-                        <div className="mt-4 flex">
-                            <input type="file" onChange={handleFileChange} className="form-input mb-2 sm:mb-0 sm:mr-4" />
-                            <button onClick={handleAvatarUpload} className="ml-4 btn btn-secondary sm:ml-4">Upload</button>
-                        </div>
-                    </div>
-                </div>
+            <div className="flex sm:flex-row items-center space-x-6">
+        <Image src={avatarSrc} alt="User Avatar" className="h-24 w-24 rounded-full" />
+        <div className="flex-1 min-w-0"> {/* Added classes to control width */}
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Avatar</h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">Your profile picture.</p>
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center">
+                <input type="file" onChange={handleFileChange} className="form-input mb-2 sm:mb-0 sm:mr-4" />
+                <button onClick={handleAvatarUpload} className="btn btn-secondary w-auto sm:ml-4">Upload</button>
             </div>
+        </div>
+    </div>
+</div>
             <div className="border-t border-gray-200">
                 <dl>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -70,10 +70,15 @@ const UserProfile = () => {
                 </dl>
             </div>
 
+            <div className="flex justify-center mt-4">
+    <button onClick={handleEditToggle} className="btn btn-primary">
+        {editMode ? 'Cancel Edit' : 'Edit Profile'}
+    </button>
+</div>
 
             
 
-            {user && <UpdateProfileForm user={user} />}
+            {editMode && user && <UpdateProfileForm user={user} />}
             <div className="mt-6 text-secondary-content">
         <h3 className="text-lg font-semibold mb-2">Notification Preferences</h3>
         <div className="flex items-center justify-start gap-4">
