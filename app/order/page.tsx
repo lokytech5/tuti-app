@@ -4,6 +4,7 @@ import { OrderCreationResponse } from '../components/types';
 import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
 import useInitializePayment from '../hooks/useInitializePayment';
 import useUserStore from '../components/useUserStore';
+import { showToast } from '../components/ToastNotifier';
 
 interface Props {
     order: OrderCreationResponse;
@@ -16,13 +17,24 @@ const OrderPage = ({order}: Props) => {
     const userEmail = user?.email || '';
 
     const handlePayment = () => {
-        console.log("User Email:", userEmail);
         setIsButtonLoading(true);
-        // Implement payment logic here
 
         initializePayment.mutate({
             email: userEmail,
             amount: order.totalPrice
+        }, {
+            onSuccess: (data) => {
+                if(data.status && data.data.authorization_url){
+                    window.location.href = data.data.authorization_url;
+                } else {
+                    showToast('Payment initialization failed: ' + data.message, 'error');
+                    setIsButtonLoading(false);
+                }
+            },
+            onError: (error) => {
+                showToast('Payment initialization error: ' + error.message, 'error');
+                setIsButtonLoading(false);
+            }
         });
     }
 

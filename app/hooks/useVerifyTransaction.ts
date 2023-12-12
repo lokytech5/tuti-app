@@ -1,23 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import React from 'react'
 import { apiClient } from '../components/services/api-client';
+import { VerifyTransactionRequest, VerifyTransactionResponse } from '../components/types';
 
-interface VerifyTransactionData {
-    reference: string;
-}
-
-interface TransactionResponse {
-    
-}
 
 const useVerifyTransaction = () => {
-    return useMutation<TransactionResponse, AxiosError, VerifyTransactionData>(
-        async ({ reference }: VerifyTransactionData) => {
-            const response = await apiClient.post('/payments/ecommerce/verify', { reference });
+    return useMutation<VerifyTransactionResponse, AxiosError, VerifyTransactionRequest>(
+        async ({ reference }: VerifyTransactionRequest) => {
+            const response = await apiClient.post<VerifyTransactionResponse>('/payments/ecommerce/verify', { reference });
             return response.data;
         },
         {
+            onSuccess: (data) => {
+                // Handle successful verification
+                console.log('Transaction verified:', data);
+            },
             onError: (error) => {
                 // Handle errors gracefully
                 console.error('Error verifying transaction:', error.message);
