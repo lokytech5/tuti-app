@@ -35,11 +35,13 @@ const LoginPage = () => {
         console.log('Form submitted', data);
         loginUser(data, {
           onSuccess: (response) => {
+            const setUser = useUserStore.getState().setUser;
             setUser({
                 _id: response._id,
               username: response.username,
               email: response.email
             });
+            console.log("User logged in:", useUserStore.getState().user);
             localStorage.setItem('token', response.token);
             showToast('Login successful', 'success');
             router.push('/home')  
