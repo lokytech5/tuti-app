@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { OrderCreationResponse } from '../components/types';
 import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
+import useInitializePayment from '../hooks/useInitializePayment';
+import useUserStore from '../components/useUserStore';
 
 interface Props {
     order: OrderCreationResponse;
@@ -9,12 +11,19 @@ interface Props {
 
 const OrderPage = ({order}: Props) => { 
     const [isButtonLoading, setIsButtonLoading] = useState(false);
-
-   
+    const initializePayment = useInitializePayment();
+    const { user } = useUserStore();
+    const userEmail = user?.email || '';
 
     const handlePayment = () => {
+        console.log("User Email:", userEmail);
         setIsButtonLoading(true);
         // Implement payment logic here
+
+        initializePayment.mutate({
+            email: userEmail,
+            amount: order.totalPrice
+        });
     }
 
     //  const getStatusBadge = () => {

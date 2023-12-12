@@ -23,6 +23,7 @@ const useLoginUser = () => {
             setUser({
               _id: data._id,
               username: data.username,
+              email: data.email
             });
         localStorage.setItem('token', data.token);
           },

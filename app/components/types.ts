@@ -77,6 +77,7 @@ export interface LoginUserResponse {
   token: string;
   username: string;
   _id: string;
+  email: string;
 }
 
 // For the verify user functionality
@@ -158,5 +159,57 @@ export interface UpdateProfileRequest {
   lastName?: string;
   phone?: string;
 }
+
+export interface InitializePaymentRequest {
+  email: string;
+  amount: number;
+}
+
+export interface InitializePaymentResponse {
+  status: string;
+  message: string;
+  data: {
+    authorization_url: string;
+    access_code: string;
+    reference: string
+  }
+}
+
+export interface VerifyTransactionRequest {
+  reference: string;
+}
+
+export interface VerifyTransactionResponse {
+  status: boolean;
+  message: string;
+  data: {
+    id: number;
+    domain: string;
+    status: string;
+    reference: string;
+    receipt_number: null | string;
+    amount: number;
+    message: null | string;
+    gateway_response: string;
+    paid_at: null | string;
+    created_at: string;
+    channel: string;
+    currency: string;
+    ip_address: string;
+    metadata: number;
+    customer: {
+      id: number;
+      first_name: null | string;
+      last_name: null | string;
+      email: string;
+      customer_code: string;
+      phone: null | string;
+      risk_action: string;
+    };
+    // ... additional fields as required
+  }
+}
+
+
 
 

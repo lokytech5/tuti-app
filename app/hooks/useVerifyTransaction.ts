@@ -14,7 +14,7 @@ interface TransactionResponse {
 const useVerifyTransaction = () => {
     return useMutation<TransactionResponse, AxiosError, VerifyTransactionData>(
         async ({ reference }: VerifyTransactionData) => {
-            const response = await apiClient.post('/api/payment/verify', { reference });
+            const response = await apiClient.post('/payments/ecommerce/verify', { reference });
             return response.data;
         },
         {

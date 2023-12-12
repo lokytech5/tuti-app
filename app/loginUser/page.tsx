@@ -38,6 +38,7 @@ const LoginPage = () => {
             setUser({
                 _id: response._id,
               username: response.username,
+              email: response.email
             });
             localStorage.setItem('token', response.token);
             showToast('Login successful', 'success');
