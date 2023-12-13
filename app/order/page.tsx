@@ -5,6 +5,7 @@ import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
 import useInitializePayment from '../hooks/useInitializePayment';
 import useUserStore from '../components/useUserStore';
 import { showToast } from '../components/ToastNotifier';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     order: OrderCreationResponse;
@@ -15,6 +16,7 @@ const OrderPage = ({order}: Props) => {
     const initializePayment = useInitializePayment();
     const { user } = useUserStore();
     const userEmail = user?.email || '';
+    const router = useRouter();
 
     const handlePayment = () => {
         setIsButtonLoading(true);

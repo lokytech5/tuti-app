@@ -127,6 +127,16 @@ export interface OrderCreationResponse {
   shipping: OrderShipping;
 }
 
+export interface OrderCompletionResponse {
+  id: string;
+  user: OrderUser;
+  items: OrderItem[];
+  totalPrice: number;
+  status: string;
+  orderDate: string;
+  shipping: OrderShipping;
+}
+
 export interface NotificationPreferences {
   emailNotifications: boolean;
   pushNotifications: boolean;

@@ -1,6 +1,5 @@
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import React from 'react'
 import { apiClient } from '../components/services/api-client';
 import { InitializePaymentRequest, InitializePaymentResponse } from '../components/types';
 

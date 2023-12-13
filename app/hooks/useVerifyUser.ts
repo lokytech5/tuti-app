@@ -1,4 +1,3 @@
-import React from 'react'
 import useUserStore from '../components/useUserStore';
 import { useMutation } from '@tanstack/react-query';
 import { VerifyUserRequest, VerifyUserResponse } from '../components/types';
