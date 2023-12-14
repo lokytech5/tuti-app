@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 import useUserStore from '../useUserStore'
-import LogoutButton from '../LogoutButton';
 import LoadingSpinner from '../LoadingSpinner';
 
 const DesktopMenu = () => {

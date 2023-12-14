@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import CartInitializer from './components/CartInitializer'
 import UserInitializer from './components/UserInitializer'
+import OrderIdInitializer from './components/OrderIdInitializer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,6 +40,7 @@ export default function RootLayout({
       <Providers>
         <UserInitializer/>
         <CartInitializer/>
+        <OrderIdInitializer/>
       <Navbar/>
       <main>{children}</main> 
       <ToastContainer />
