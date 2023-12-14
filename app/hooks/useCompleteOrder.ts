@@ -1,10 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
-import { OrderCompletionResponse, OrderCreationResponse } from '../components/types'
+import { OrderCompletionResponse } from '../components/types'
 import { AxiosError } from 'axios'
 import { authApiClient } from '../components/services/api-client';
+import useOrderStore from '../components/useOrderStore';
 
 interface OrderCompletionData {
-    orderId: string | null;
+    orderId: string;
 }
 
 export interface OrderCompletionErrorResponse {
@@ -13,25 +14,26 @@ export interface OrderCompletionErrorResponse {
 
 
 const useCompleteOrder = () => {
-    return useMutation<OrderCreationResponse, AxiosError<OrderCompletionErrorResponse>, OrderCompletionData>(
-        (completionData: OrderCompletionData) => {
-            console.log("Sending completion request for order ID:", completionData.orderId);  // Log the order ID being sent
+    const orderIdFromStore = useOrderStore((state) => state.orderId);
 
-          return authApiClient.put<OrderCreationResponse>(`/orders/complete/${completionData.orderId}`)
+    return useMutation<OrderCompletionResponse, AxiosError<OrderCompletionErrorResponse>, OrderCompletionData>(
+        (data: OrderCompletionData) => {
+          console.log("Sending completion request for order ID:", orderIdFromStore);
+
+          return authApiClient.put<OrderCompletionResponse>(`/orders/complete/${orderIdFromStore}`)
             .then(response => response.data);
         },
         {
-            onSuccess: (data) => {
-              // Handle successful order completion
-              console.log('Order completed successfully:', data);
-            },
-            onError: (error: AxiosError<OrderCompletionErrorResponse>) => {
-                const errorMessage = error.response?.data?.error ?? 'An unexpected error occurred';
-                console.error('Order completion failed:', errorMessage); 
-                // Additional error handling as needed
-            },
+          // Success and error handlers remain the same
+          onSuccess: (data) => {
+            console.log('Order completed successfully:', data);
+          },
+          onError: (error: AxiosError) => {
+            const errorMessage = error.response?.data ?? 'An unexpected error occurred';
+            console.error('Order completion failed:', errorMessage);
+          },
         }
-    );
-};
+      );
+    };
 
 export default useCompleteOrder

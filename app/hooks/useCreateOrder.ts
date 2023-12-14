@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { authApiClient } from '../components/services/api-client';
 import { AxiosError } from 'axios';
 import { OrderCreationResponse } from '../components/types';
+import useOrderStore from '../components/useOrderStore';
 
 interface OrderCreationData {
     items: Array<{
@@ -35,6 +36,8 @@ const useCreateOrder = () => {
         {
             onSuccess: (data) => {
               // Handle success scenario
+              useOrderStore.getState().setOrderId(data.id);
+
               console.log('Order created successfully:', data);
             },
             onError: (error: AxiosError<OrderCreationErrorResponse>) => {
