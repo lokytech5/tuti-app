@@ -8,15 +8,15 @@ import useOrderStore from '../components/useOrderStore';
 
 const PaymentCallbackPage = () => {
     const router = useRouter();
-    const { mutate: complete, isSuccess: orderCompleted, isError, error } = useCompleteOrder();
-    const orderId = useOrderStore(state => state.orderId);
     const { mutate: verify } = useVerifyTransaction();
+    const { mutate: complete, isSuccess: orderCompleted, isError, error } = useCompleteOrder();
+     const orderId = useOrderStore(state => state.orderId);
      useEffect(() => {
         if (typeof window !== 'undefined' && orderId) {
-            console.log('PaymentCallbackPage orderId:', orderId);
             const reference = new URLSearchParams(window.location.search).get('reference');
             if (reference) {
-                verify({ reference },
+                verify(
+                    { reference },
                     {
                         onSuccess: (verifyData) => {
                             if (verifyData.status) {
