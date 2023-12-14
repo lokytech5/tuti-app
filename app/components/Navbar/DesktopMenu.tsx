@@ -2,9 +2,12 @@ import Link from 'next/link'
 import React from 'react'
 import useUserStore from '../useUserStore'
 import LogoutButton from '../LogoutButton';
+import LoadingSpinner from '../LoadingSpinner';
 
 const DesktopMenu = () => {
-  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const { isAuthenticated, loading } = useUserStore();
+
+  if(loading) return <LoadingSpinner/>
 
   return (
     <div className="hidden lg:flex">
@@ -16,10 +19,6 @@ const DesktopMenu = () => {
          <li><Link href="/registerUser">Register</Link></li>
          <li><Link href="/loginUser">Login</Link></li>
         </>
-      )}
-
-      {isAuthenticated && (
-        <LogoutButton/>
       )}
     </ul>
 

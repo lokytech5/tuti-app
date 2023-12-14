@@ -7,6 +7,7 @@ import { Playfair_Display, Open_Sans } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import CartInitializer from './components/CartInitializer'
+import UserInitializer from './components/UserInitializer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,6 +37,7 @@ export default function RootLayout({
           
       <body>
       <Providers>
+        <UserInitializer/>
         <CartInitializer/>
       <Navbar/>
       <main>{children}</main> 
