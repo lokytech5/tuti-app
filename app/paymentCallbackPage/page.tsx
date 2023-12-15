@@ -38,25 +38,15 @@ const PaymentCallbackPage = () => {
 
     useEffect(() => {
         if (orderCompleted) {
-            router.push(`/order-success/${orderId}`);
+            router.push(`/orderSuccessful/${orderId}`);
         }
     }, [orderCompleted, orderId, router]);
 
     return (
         <div className="container mx-auto p-4 text-secondary-content">
-        <h1 className="text-3xl font-bold text-center my-6">Finalizing Your Order</h1>
-        {isError && (
-            <p className="text-red-500">
-                There was an error processing your order: {error?.message || 'Unknown error'}
-            </p>
-        )}
-        {!isError && (
-            <div>
-                <p>Thank you for your payment. Your transaction has been successful.</p>
-                <p>We are now finalizing your order details. A confirmation email will be sent to you shortly.</p>
-            </div>
-        )}
-    </div>
+            <h1 className="text-3xl font-bold text-center my-6">Processing Your Payment...</h1>
+            {/* Optionally, display a spinner or loading indicator */}
+        </div>
     );
 };
 
