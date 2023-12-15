@@ -8,30 +8,30 @@ export interface Category {
   __v: number;
 }
 export interface Product {
-    _id: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-    category: Category;
-    stock: number;
-    averageRating: number;
-    reviews: any[];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-    viewCount: number;
-  }
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: Category;
+  stock: number;
+  averageRating: number;
+  reviews: any[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  viewCount: number;
+}
 
 export interface ProductResponse {
-    product?: Product[];
-    latestProducts?: Product[];
-    totalPages: number;
-  }
+  product?: Product[];
+  latestProducts?: Product[];
+  totalPages: number;
+}
 
 export interface LatestProductResponse {
-    latestProducts: Product[];
-    totalPages: number;
+  latestProducts: Product[];
+  totalPages: number;
 }
 
 export interface CuratedCollection {
@@ -55,7 +55,7 @@ export interface SingleProductResponse {
   product: Product;
 }
 
-export interface RegisterUserData{
+export interface RegisterUserData {
   username: string;
   password: string;
   email: string;
@@ -181,8 +181,8 @@ export interface InitializePaymentResponse {
   data: {
     authorization_url: string;
     access_code: string;
-    reference: string
-  }
+    reference: string;
+  };
 }
 
 export interface VerifyTransactionRequest {
@@ -217,9 +217,5 @@ export interface VerifyTransactionResponse {
       risk_action: string;
     };
     // ... additional fields as required
-  }
+  };
 }
-
-
-
-

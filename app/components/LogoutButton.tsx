@@ -1,21 +1,20 @@
-import React from 'react'
-import useUserStore from './useUserStore'
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import useUserStore from "./useUserStore";
 
 const LogoutButton = () => {
-    const logout = useUserStore((state) => state.logout);
-    const router = useRouter();
+  const logout = useUserStore((state) => state.logout);
+  const router = useRouter();
 
-    const handleLogout = () => {
-        logout();
-        localStorage.removeItem('user');
-        router.push('/loginUser');
-    }
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("user");
+    router.push("/loginUser");
+  };
   return (
-   <button onClick={handleLogout} className='btn btn-ghost'>
-    logout
-   </button>
-  )
-}
+    <button onClick={handleLogout} className="btn btn-ghost">
+      logout
+    </button>
+  );
+};
 
-export default LogoutButton
+export default LogoutButton;

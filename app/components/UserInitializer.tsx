@@ -1,22 +1,22 @@
-"use client"
-import React, { useEffect } from 'react'
-import useUserStore from './useUserStore';
+"use client";
+import { useEffect } from "react";
+import useUserStore from "./useUserStore";
 
 const UserInitializer = () => {
-    const initializeUser = useUserStore((state) => state.initializeUser);
-    const persistUser = useUserStore((state) => state.persistUser);
+  const initializeUser = useUserStore((state) => state.initializeUser);
+  const persistUser = useUserStore((state) => state.persistUser);
 
-    useEffect(() => {
-        initializeUser();
+  useEffect(() => {
+    initializeUser();
 
-        window.addEventListener('beforeunload', persistUser);
+    window.addEventListener("beforeunload", persistUser);
 
-        return () => {
-            window.removeEventListener('beforeunload', persistUser);
-        };
-    }, [initializeUser, persistUser]);
+    return () => {
+      window.removeEventListener("beforeunload", persistUser);
+    };
+  }, [initializeUser, persistUser]);
 
-    return null;
+  return null;
 };
 
-export default UserInitializer
+export default UserInitializer;

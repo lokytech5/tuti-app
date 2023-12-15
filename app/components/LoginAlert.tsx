@@ -1,18 +1,17 @@
-import { useRouter } from 'next/navigation';
-import React from 'react'
+import { useRouter } from "next/navigation";
 
 interface Props {
-    onClose: () => void;
+  onClose: () => void;
 }
 
 const LoginAlert = ({ onClose }: Props) => {
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleLogin = () => {
-        onClose();
-        router.push('/loginUser');
-    };
-    
+  const handleLogin = () => {
+    onClose();
+    router.push("/loginUser");
+  };
+
   return (
     <div className="alert">
       <p>Please log in to proceed to checkout.</p>
@@ -23,7 +22,7 @@ const LoginAlert = ({ onClose }: Props) => {
         Cancel
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default LoginAlert
+export default LoginAlert;

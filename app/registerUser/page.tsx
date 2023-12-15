@@ -15,7 +15,7 @@ import VerificationModal from '../components/VerificationModal'
 
 
 const schema = z.object({
-    username: z.string().min(1, 'Username is required'),
+    username: z.string().min(5, 'Username must be at least 5 characters long'),
     email: z.string().email('Invalid email address'),
     password: z.string().min(5, 'Password must be at least 5 characters long'),
 });
@@ -25,7 +25,6 @@ type FormData = z.infer<typeof schema>;
 const RegisterUserPage = () => {
     const { register, handleSubmit, formState: { errors }} = useForm<FormData>({ resolver: zodResolver(schema),});
     const router = useRouter();
-    // Get the mutation function and state from your hook
   const { mutate: registerUser, isLoading, isError, error } = useRegisterUser();
   const [showVerificationModal, setShowVerificationModal] = useState(false);
 

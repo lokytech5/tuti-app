@@ -9,7 +9,7 @@ interface Props {
 }
 
 const OrderSuccessfulPage = ({order}: Props) => {
-    const customerSupportEmail = 'support@example.com';
+    const customerSupportEmail = 'adaonwuegbuzie@gmail.com';
     
     return (
         <div className="container mx-auto p-4 text-secondary-content">
@@ -51,7 +51,7 @@ const OrderSuccessfulPage = ({order}: Props) => {
                     <a href={`mailto:${customerSupportEmail}`} className="btn btn-outline btn-accent flex items-center">
                         <FaMailBulk className="w-5 h-5 mr-2"/> Contact Support
                     </a>
-                    <button onClick={() => window.location.href = '/shop'} className="btn btn-primary flex items-center">
+                    <button onClick={() => window.location.href = '/product'} className="btn btn-primary flex items-center">
                         <FaShoppingCart className="w-5 h-5 mr-2"/> Continue Shopping
                     </button>
                 </div>
