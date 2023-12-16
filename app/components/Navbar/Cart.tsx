@@ -12,7 +12,7 @@ const Cart = ({ onCartClick }: Props) => {
     0
   );
   return (
-    <div className="dropdown dropdown-end" onClick={onCartClick}>
+    <div className="dropdown dropdown-end mr-2" onClick={onCartClick}>
       <label tabIndex={0} className="btn btn-ghost btn-circle">
         <div className="indicator">
           <svg

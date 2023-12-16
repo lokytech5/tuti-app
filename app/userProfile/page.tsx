@@ -38,10 +38,6 @@ const UserProfile = () => {
                     <h3 className="text-lg leading-6 font-medium text-gray-900">User Profile</h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and preferences.</p>
                 </div>
-                
-                {/* <button onClick={() => setEditMode(!editMode)} className="btn btn-primary">
-                    {editMode ? 'Cancel' : 'Edit Profile'}
-                </button> */}
             </div>
             <div className="px-4 py-5 sm:px-6">
             <div className="flex sm:flex-row items-center space-x-6">

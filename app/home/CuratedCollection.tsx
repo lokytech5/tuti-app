@@ -20,15 +20,19 @@ const CuratedCollection = () => {
  <h1 className="text-5xl font-bold mb-6 text-center">New Arrivals</h1>
 
 
- <div className="flex flex-wrap justify-center gap-10">
-          {collections.map((collection, index) => (
-            <CuratedProductCard
-            key={index} 
-            id={collection._id} 
-            name={collection.name} 
-            image={collection.bannerImage}/>
-          ))}
-        </div>
+ {/* Carousel */}
+ <div className="carousel rounded-box">
+                {collections.map((collection, index) => (
+                    <div className="carousel-item" key={index}>
+                        <Image 
+                            src={collection.bannerImage} 
+                            alt={collection.name} 
+                            width={400} // Adjust width as needed
+                            height={500} // Adjust height as needed
+                        />
+                    </div>
+                ))}
+            </div>
 
 {/* Feature Banner */}
 <div className="mb-10 rounded shadow-md p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between">

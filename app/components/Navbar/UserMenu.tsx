@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import imgWoman from "../../../public/next.svg";
+import imgWoman from "../../../public/images/avatar.png";
 import LogoutButton from "../LogoutButton";
 import useUserStore from "../useUserStore";
 const UserMenu = () => {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   return (
-    <div className="dropdown dropdown-end text-secondary-content">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
+    <div className="dropdown dropdown-end text-secondary-content mr-2">
+      <label tabIndex={0} className="btn btn-ghost btn-circle">
+        <div className="avatar">
+        <div className="w-12 rounded-full">
           <Image src={imgWoman} alt="Picture of a woman" />
+        </div>
         </div>
       </label>
       <ul

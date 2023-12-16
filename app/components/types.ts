@@ -165,9 +165,11 @@ export interface UserProfileResponse {
 }
 
 export interface UpdateProfileRequest {
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
+  profile: {
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+  }
 }
 
 export interface InitializePaymentRequest {

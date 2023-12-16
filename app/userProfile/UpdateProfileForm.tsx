@@ -4,10 +4,18 @@ import { UpdateProfileRequest, UserProfile } from '../components/types';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { showToast } from '../components/ToastNotifier';
 
 interface Props {
     user: UserProfile;
 }
+
+interface ProfileFormData {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+}
+
 
 const profileSchema = z.object({
     firstName: z.string().optional(), // Define validation rules
@@ -18,24 +26,32 @@ const profileSchema = z.object({
 const UpdateProfileForm = ({user}: Props) => {
     const updateProfileMutation = useUpdateUserProfile();
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormData>({
       resolver: zodResolver(profileSchema),
 
     });
   
-    const onSubmit: SubmitHandler<UpdateProfileRequest> = (data) => {
-      updateProfileMutation.mutate( data );
+    const onSubmit: SubmitHandler<ProfileFormData> = (data) => {
+      const updateData: UpdateProfileRequest = {
+        profile: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+        }
+      }
+      updateProfileMutation.mutate( updateData );
+      showToast("successfully updated profile", 'success')
     };
         
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg">
+    <div className="p-6 shadow-md rounded-lg">
          <div className="mb-4 text-secondary-content">
                 <h3 className="text-lg font-semibold">Current Information</h3>
                 <p>First Name: {user.profile?.firstName || 'Not set'}</p>
                 <p>Last Name: {user.profile?.lastName || 'Not set'}</p>
                 <p>Phone: {user.profile?.phone || 'Not set'}</p>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 text-secondary-content">
                 <div className="flex flex-col">
                     <label htmlFor="firstName" className="text-sm font-semibold text-gray-700">First Name</label>
                     <input
