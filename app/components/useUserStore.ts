@@ -5,6 +5,7 @@ interface User {
     username: string;
     email?: string;
     isAdmin?: boolean;
+    avatar?: string;
   }
   
   interface UserState {
@@ -19,6 +20,7 @@ interface User {
     logout: () => void;
     initializeUser: () => void;
     persistUser: () => void;
+    setAvatar: (avatarUrl: string) => void;
   }
   
 
@@ -58,6 +60,13 @@ interface User {
       const { user } = get();
       localStorage.setItem('user', JSON.stringify(user));
   },
+  setAvatar: (avatarUrl) => set((state) => {
+    if(state.user) {
+      return { user: {...state.user, avatar: avatarUrl }};
+    }
+    return state;
+  }),
+  
   }))
 
   export default useUserStore

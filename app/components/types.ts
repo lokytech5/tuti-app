@@ -172,6 +172,11 @@ export interface UpdateProfileRequest {
   }
 }
 
+export interface AvatarUploadResponse {
+  message: string;
+  user: UserProfile;
+}
+
 export interface InitializePaymentRequest {
   email: string;
   amount: number;

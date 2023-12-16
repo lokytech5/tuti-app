@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import imgWoman from "../../../public/images/avatar.png";
+import imgWoman from "../../../public/images/avatar1.png";
 import LogoutButton from "../LogoutButton";
 import useUserStore from "../useUserStore";
 const UserMenu = () => {
