@@ -1,4 +1,3 @@
-import React from 'react'
 import {  authApiClient } from '../components/services/api-client';
 import { UserProfileResponse } from '../components/types';
 import { useQuery } from '@tanstack/react-query';

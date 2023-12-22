@@ -78,9 +78,8 @@ export interface LoginUserResponse {
   username: string;
   _id: string;
   email: string;
+  avatar: string;
 }
-
-// For the verify user functionality
 export interface VerifyUserRequest {
   token: string;
 }
@@ -223,6 +222,5 @@ export interface VerifyTransactionResponse {
       phone: null | string;
       risk_action: string;
     };
-    // ... additional fields as required
   };
 }

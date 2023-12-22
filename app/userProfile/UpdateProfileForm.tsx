@@ -18,7 +18,7 @@ interface ProfileFormData {
 
 
 const profileSchema = z.object({
-    firstName: z.string().optional(), // Define validation rules
+    firstName: z.string().optional(),
     lastName: z.string().optional(),
     phone: z.string().optional(),
   });

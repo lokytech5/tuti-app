@@ -3,6 +3,7 @@ import { LoginUserData, LoginUserResponse } from '../components/types';
 import { AxiosError } from 'axios';
 import { apiClient } from '../components/services/api-client';
 import useUserStore from '../components/useUserStore';
+import { showToast } from '../components/ToastNotifier';
 
 interface LoginErrorResponse {
   error?: string;
@@ -23,7 +24,8 @@ const useLoginUser = () => {
             setUser({
               _id: data._id,
               username: data.username,
-              email: data.email
+              email: data.email,
+              avatar: data.avatar
             });
         localStorage.setItem('token', data.token);
           },
@@ -33,6 +35,7 @@ const useLoginUser = () => {
         ? error.response.data.errors.map(e => e.msg).join(', ')
         : error.response?.data?.error ?? 'An unexpected error occurred';
         console.error('Login failed:', errorMessage);   
+        showToast('Login failed', 'error');
         },
         }
       );

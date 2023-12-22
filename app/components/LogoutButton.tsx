@@ -8,6 +8,7 @@ const LogoutButton = () => {
   const handleLogout = () => {
     logout();
     localStorage.removeItem("user");
+    localStorage.removeItem('userAvatar');
     router.push("/loginUser");
   };
   return (

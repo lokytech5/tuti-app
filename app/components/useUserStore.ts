@@ -46,6 +46,11 @@ interface User {
       if (savedUser) {
           try {
               const user = JSON.parse(savedUser);
+              const avatar = localStorage.getItem('avatar');
+              if (avatar) {
+                user.avatar = avatar; // Set the avatar in the user object
+            }
+              console.log('Retrieved user from localStorage:', user);
               set({ user, isAuthenticated: !!user, isVerified: get().isVerified, loading: false });
             } catch (error) {
               console.error('Failed to parse user from localStorage:', error);
@@ -66,7 +71,7 @@ interface User {
     }
     return state;
   }),
-  
+
   }))
 
   export default useUserStore

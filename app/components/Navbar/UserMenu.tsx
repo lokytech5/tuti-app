@@ -5,12 +5,18 @@ import LogoutButton from "../LogoutButton";
 import useUserStore from "../useUserStore";
 const UserMenu = () => {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const user = useUserStore((state) => state.user); // Get the user from the store
+
+  const avatarSrc = user?.avatar ? `${user.avatar}?timestamp=${new Date().getTime()}` : imgWoman;
+
+
   return (
     <div className="dropdown dropdown-end text-secondary-content mr-2">
       <label tabIndex={0} className="btn btn-ghost btn-circle">
         <div className="avatar">
         <div className="w-12 rounded-full">
-          <Image src={imgWoman} alt="Picture of a woman" />
+          <Image src={avatarSrc} alt="Picture of a woman"width={150}
+        height={150}  />
         </div>
         </div>
       </label>

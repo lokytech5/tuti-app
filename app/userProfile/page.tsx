@@ -1,32 +1,42 @@
 "use client"
-import React, { ReactHTMLElement, useState } from 'react'
+import React, { useState } from 'react'
 import useUserProfile from '../hooks/useUserProfile';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorAlert from '../components/ErrorAlert';
 import defaultAvatar from '../../public/images/avatar.png';
 import Image from 'next/image';
 import UpdateProfileForm from './UpdateProfileForm';
+import useUploadAvatar from '../hooks/useUploadAvatar';
 
 const UserProfile = () => {
     const { data: userProfile, isLoading, isError, error } = useUserProfile();
+    const { mutate: uploadAvatar, isLoading: isAvatarUploading } = useUploadAvatar();
 
     const user = userProfile?.user;
 
-    const avatarSrc = user?.avatar ? user.avatar : defaultAvatar;
+    const avatarSrc = user?.avatar ? `${user.avatar}?timestamp=${new Date().getTime()}` : defaultAvatar;
 
+
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [editMode, setEditMode] = useState(false);
 
     const handleEditToggle = () => {
         setEditMode(!editMode);
     };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setSelectedFile(e.target.files[0]);
-  };
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
 
-  const handleAvatarUpload = () => {
-    // Use your uploadAvatar hook to upload the selected file
-  };
+    const handleAvatarUpload = () => {
+        if (selectedFile) {
+            uploadAvatar(selectedFile);
+        } else {
+            console.log('No file selected');
+        }
+    };
 
 
     if(isLoading) return <LoadingSpinner/>
@@ -41,13 +51,17 @@ const UserProfile = () => {
             </div>
             <div className="px-4 py-5 sm:px-6">
             <div className="flex sm:flex-row items-center space-x-6">
-        <Image src={avatarSrc} alt="User Avatar" className="h-24 w-24 rounded-full" />
-        <div className="flex-1 min-w-0"> {/* Added classes to control width */}
+        <Image src={avatarSrc} alt="User Avatar" className="h-24 w-24 rounded-full"
+        width={150}
+        height={150}  />
+        <div className="flex-1 min-w-0 text-secondary-content">
             <h3 className="text-lg leading-6 font-medium text-gray-900">Avatar</h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">Your profile picture.</p>
             <div className="mt-6 flex flex-col sm:flex-row sm:items-center">
                 <input type="file" onChange={handleFileChange} className="form-input mb-2 sm:mb-0 sm:mr-4" />
-                <button onClick={handleAvatarUpload} className="btn btn-secondary w-auto sm:ml-4">Upload</button>
+                <button onClick={handleAvatarUpload} className="btn btn-secondary w-auto sm:ml-4">
+                    {isAvatarUploading ? 'Uploading....': 'Upload'}</button>
+                    {isAvatarUploading && <LoadingSpinner />}
             </div>
         </div>
     </div>

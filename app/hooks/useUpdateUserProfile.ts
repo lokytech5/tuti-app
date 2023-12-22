@@ -12,8 +12,6 @@ const useUpdateUserProfile = () => {
       },
       {
         onSuccess: (data) => {
-          // Handle success scenario
-          console.log('Profile updated successfully:', data);
           queryClient.invalidateQueries(['userProfile']);
         },
         onError: (error: AxiosError) => {
