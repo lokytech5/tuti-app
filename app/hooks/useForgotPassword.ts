@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { ForgotPasswordData, ForgotPasswordResponse } from '../components/types';
 import { AxiosError } from 'axios';
-import { authApiClient } from '../components/services/api-client';
+import { apiClient, authApiClient } from '../components/services/api-client';
 import { showToast } from '../components/ToastNotifier';
 
 interface ForgotPasswordErrorResponse {
@@ -9,16 +9,21 @@ interface ForgotPasswordErrorResponse {
     error?: string;
   }
 
-const useForgotPassword = () => {
+interface Props {
+    onSuccessCallback: () => void;
+}
+
+const useForgotPassword = ({onSuccessCallback}: Props) => {
     return useMutation<ForgotPasswordResponse, AxiosError<ForgotPasswordErrorResponse>, ForgotPasswordData>(
         (forgotPasswordData: ForgotPasswordData) => {
-          return authApiClient.post<ForgotPasswordResponse>('/auth/forgotPassword', forgotPasswordData)
+          return apiClient.post<ForgotPasswordResponse>('/auth/forgotPassword', forgotPasswordData)
             .then(response => response.data);
         },
         {
           onSuccess: (data) => {
-            showToast('Successfully send OTP to your email address', 'success')
+            showToast('OTP has been successfully sent to your email address.', 'success')
             console.log('Forgot Password request successful:', data.message);
+            onSuccessCallback();
           },
           onError: (error: AxiosError<ForgotPasswordErrorResponse>) => {
             const errorMessage = error.response?.data?.error ?? error.response?.data?.message ?? 'An unexpected error occurred';

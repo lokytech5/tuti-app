@@ -5,14 +5,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const ForgotPassword = () => {
-
     const [email, setEmail] = useState('');
-    const { mutate, isLoading, error } = useForgotPassword();
-  
-    const handleSubmit = (event: React.FormEvent) => {
-      event.preventDefault();
-      mutate({ email });
+    const [submitted, setSubmitted] = useState(false);
+    
+    const handleSuccess = () => {
+        setSubmitted(true); // Set submitted to true on successful submission
     };
+    
+    const { mutate, isLoading, error } = useForgotPassword({ onSuccessCallback: handleSuccess });
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        mutate({ email });
+      };
+    
+    if (submitted) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 text-secondary-content">
+                <div className="bg-white rounded-xl shadow-xl p-8 text-center">
+                    <h2 className="text-3xl font-semibold mb-4">Check Your Email</h2>
+                    <p>An email has been sent to <strong>{email}</strong> with further instructions to reset your password.</p>
+                    <Link href="/loginUser">
+                        <button className="btn btn-primary mt-4">Return to Login</button>
+                    </Link>
+                </div>
+            </div>
+        );
+    }
     
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -47,7 +66,7 @@ const ForgotPassword = () => {
               />
               {error && <p className="text-red-500">{error.message}</p>}
               <button type="submit" className="btn btn-primary w-full md:w-5/6" disabled={isLoading}>
-                {isLoading ? 'Sending...' : 'Send Reset Link'}
+                {isLoading ? 'Sending...' : 'Send'}
               </button>
             </div>
           </form>
