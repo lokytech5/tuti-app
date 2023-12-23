@@ -96,7 +96,7 @@ const LoginPage = () => {
                 </div>
                 </form>
                 <div className="text-right text-secondary-content">
-                                <Link href="/resetPassword">
+                                <Link href="/forgotPassword">
                                     <p className="text-sm hover:underline">Forgot Password?</p>
                                 </Link>
                             </div>
