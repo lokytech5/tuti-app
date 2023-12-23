@@ -50,10 +50,8 @@ interface User {
               if (avatar) {
                 user.avatar = avatar; // Set the avatar in the user object
             }
-              console.log('Retrieved user from localStorage:', user);
               set({ user, isAuthenticated: !!user, isVerified: get().isVerified, loading: false });
             } catch (error) {
-              console.error('Failed to parse user from localStorage:', error);
               localStorage.removeItem('user');
               set({ loading: false });
           }

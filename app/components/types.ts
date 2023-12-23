@@ -224,3 +224,20 @@ export interface VerifyTransactionResponse {
     };
   };
 }
+
+export interface ForgotPasswordData {
+  email: string;
+}
+export interface ForgotPasswordResponse {
+  message: string;
+}
+
+export interface ResetPasswordData {
+  newPassword: string;
+  confirmPassword: string;
+  token: string;
+  otp: string;
+}
+export interface ResetPasswordResponse {
+  message: string;
+}
