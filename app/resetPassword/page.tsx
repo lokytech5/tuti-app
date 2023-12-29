@@ -61,7 +61,7 @@ const ResetPassword = () => {
           <div className="space-y-4 text-secondary-content">
             <input 
                {...register('newPassword')} 
-              className="input input-bordered w-full" 
+              className="input input-bordered w-full sm:w-3/4 md:w-5/6 lg:w-96"
               type="password" 
               placeholder="New Password"
             />
@@ -69,7 +69,7 @@ const ResetPassword = () => {
 
             <input 
              {...register('confirmPassword')} 
-              className="input input-bordered w-full" 
+              className="input input-bordered w-full sm:w-3/4 md:w-5/6 lg:w-96"
               type="password" 
               placeholder="Confirm Password"
             />
@@ -77,7 +77,7 @@ const ResetPassword = () => {
 
             <input 
              {...register('otp')}
-              className="input input-bordered w-full" 
+              className="input input-bordered w-full sm:w-3/4 md:w-5/6 lg:w-96"
               type="text" 
               placeholder="OTP"
             />

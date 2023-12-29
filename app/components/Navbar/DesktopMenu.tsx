@@ -22,6 +22,9 @@ const DesktopMenu = () => {
             <li>
               <Link href="/loginUser">Login</Link>
             </li>
+            <li>
+              <Link href="/aboutUs">AboutUs</Link>
+            </li>
           </>
         )}
       </ul>

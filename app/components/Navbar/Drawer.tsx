@@ -24,6 +24,9 @@ const Drawer = ({ closeDrawer }: DrawerProps) => {
             <li onClick={closeDrawer} className="text-center">
               <Link href="/loginUser">Login</Link>
             </li>
+            <li onClick={closeDrawer} className="text-center">
+              <Link href="/aboutUs">AboutUs</Link>
+            </li>
           </>
         )}
 

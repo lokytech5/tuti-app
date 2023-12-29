@@ -1,6 +1,7 @@
 import React from 'react'
 import pic1 from '../../public/images/po1.jpg'
 import Image from 'next/image'
+import Link from 'next/link'
 const Hero = () => {
   return (
     <div className="hero min-h-screen bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500">
@@ -24,7 +25,9 @@ const Hero = () => {
        </p>
 
          <div className="flex space-x-6 justify-center mt-5">
+          <Link href={'/product'}>
            <button className="btn btn-outline btn-accent">Shop Now</button>
+          </Link>
            <button className="btn btn-ghost">Learn More</button>
          </div>
        </header>
