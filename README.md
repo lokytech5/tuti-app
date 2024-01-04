@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tuti-Hairs E-Commerce Application
+
+![Tuti-Hairs Logo](path/to/your/image.png)
+
+Welcome to the **Tuti-Hairs** e-commerce application repository. This application is designed for the sale of hair products, utilizing a modern tech stack comprising Next.js with TypeScript for the frontend, and JavaScript for the backend. We leverage MongoDB for data persistence, ensuring a robust and scalable solution.
+
+## Features
+
+- **User Registration and Profile Management**: Users can register and maintain their profiles, facilitating a personalized shopping experience.
+- **Product Browsing and Ordering**: A wide range of hair products are available for selection and order.
+- **Secure Payment Processing**: Integration with Paystack for reliable and secure payment transactions.
+- **Intelligent Shipping Calculation**: An advanced algorithm calculates shipping costs based on user location.
+
+## Technology Stack
+
+- **Frontend**: Next.js, TypeScript
+- **Backend**: JavaScript
+- **Database**: MongoDB
+- **Payment Gateway**: Paystack
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Node.js
+- MongoDB
+- Paystack account for payment gateway integration
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ``git clone https://github.com/your-username/tuti-hairs.git``
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Navigate to the project directory:
+   ``cd tuti-hairs``
 
-## Learn More
+3. Install the dependencies:
+   ``npm install``
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a .env file in the root directory and add the following configurations:
+``MONGODB_URI=<your_mongodb_uri> PAYSTACK_KEY=<your_paystack_key>``
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Running The Application
 
-## Deploy on Vercel
+- **Run the application in development mode**:
+  ``npm run dev``
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Build the application for production:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+``npm run build ``
+``npm start``
+
+## Contributing
+
+Contributions to the Tuti-Hairs project are welcome. Please refer to the CONTRIBUTING.md file for guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
