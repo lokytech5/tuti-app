@@ -16,6 +16,12 @@ const Drawer = ({ closeDrawer }: DrawerProps) => {
         <li onClick={closeDrawer} className="text-center">
           <Link href="/product">Product</Link>
         </li>
+        <li onClick={closeDrawer} className="text-center">
+              <Link href="/trainingclass">Trainingclass</Link>
+            </li>
+        <li onClick={closeDrawer} className="text-center">
+              <Link href="/aboutUs">AboutUs</Link>
+            </li>
         {!isAuthenticated && (
           <>
             <li onClick={closeDrawer} className="text-center">
@@ -23,9 +29,6 @@ const Drawer = ({ closeDrawer }: DrawerProps) => {
             </li>
             <li onClick={closeDrawer} className="text-center">
               <Link href="/loginUser">Login</Link>
-            </li>
-            <li onClick={closeDrawer} className="text-center">
-              <Link href="/aboutUs">AboutUs</Link>
             </li>
           </>
         )}
