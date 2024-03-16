@@ -1,6 +1,10 @@
 # Tuti-Hairs E-Commerce Application
 
-![Tuti-Hairs Logo](path/to/your/image.png)
+![HomePage](public/images/Screenshot1.png)
+![Latest-Product](public/images/Screenshot5.png)
+![Product-Page](public/images/Screenshot3.png)
+![Product-DetailsPage](public/images/Screenshot4.png)
+![Cart](public/images/Screenshot6.png)
 
 Welcome to the **Tuti-Hairs** e-commerce application repository. This application is designed for the sale of hair products, utilizing a modern tech stack comprising Next.js with TypeScript for the frontend, and JavaScript for the backend. We leverage MongoDB for data persistence, ensuring a robust and scalable solution.
 
