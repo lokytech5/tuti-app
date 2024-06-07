@@ -37,7 +37,7 @@ const CuratedCollection = () => {
 {/* Feature Banner */}
 <div className="mb-10 rounded shadow-md p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between">
   <div className="mb-4 sm:mb-0">
-    <h2 className="text-xl font-semibold mb-2">Editor's Pick</h2>
+    <h2 className="text-xl font-semibold mb-2">Editor&apos;s Pick</h2>
     <p>Experience our most awaited, premium hair product!</p>
   </div>
   <div className="flex-shrink-0">

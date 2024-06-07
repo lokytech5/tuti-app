@@ -48,7 +48,8 @@ const AboutUsPage = () => {
             <div className="flex overflow-x-auto gap-4">
                 {/* Replace with actual testimonials */}
                 <div className="min-w-80 bg-white p-6 rounded shadow-lg">
-                    <p className="text-lg">"Absolutely adore the texture and quality of Tuti Hairs. It's been a game-changer for my style!"</p>
+                <p className="text-lg">Absolutely adore the texture and quality of Tuti Hairs. It&apos;s been a game-changer for my style!</p>                   
+                 <cite className="block mt-4 font-semibold"> Isabella K.</cite>
                     <cite className="block mt-4 font-semibold">– Isabella K.</cite>
                 </div>
                 {/* Repeat for other testimonials */}

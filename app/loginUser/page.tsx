@@ -65,7 +65,7 @@ const LoginPage = () => {
 
         <div className="w-full lg:w-1/2 p-8 space-y-5">
             <div className="flex justify-end items-center">
-                <span className="text-gray-600 text-sm">Don't have an account?</span>
+                <span className="text-gray-600 text-sm">Don&apos;t have an account?</span>
                 <Link href="/registerUser">
                 <button className="btn btn-outline text-sm py-1 px-3 ml-4">Register</button>
                 </Link>

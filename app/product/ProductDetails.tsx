@@ -102,7 +102,7 @@ const handleAddToCartClick = () => {
           {/* Adding the inches using DaisyUI's badge or pill */}
 <div className="mb-6 flex items-center space-x-2.5">
     <h4 className="length-label text-md font-semibold mb-0 text-secondary-content">Length:</h4>
-    <span className="length-value badge badge-primary text-md">{category.inches}"</span>
+    <span className="length-value badge badge-primary text-md">{category.inches}&quot;</span>
           </div>
 
           {/* Stock availability */}
