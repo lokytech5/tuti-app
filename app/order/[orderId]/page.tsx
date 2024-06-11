@@ -1,9 +1,10 @@
-"use client"
+
 import ErrorAlert from '@/app/components/ErrorAlert';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
-import useFetchOrder from '@/app/hooks/useFetchOrder';
+import useFetchOrderById from '@/app/hooks/useFetchOrderById';
 import React from 'react'
 import OrderPage from '../page';
+
 
 interface Props {
   params: { orderId: string}
@@ -13,12 +14,21 @@ const OrderDetailsPage = ({ params: {orderId}}: Props) => {
 
   const id: string | undefined = orderId as string;
 
-  const { data: order, isLoading, error } = useFetchOrder({ orderId });
+  const { data: order, isLoading, error } =  useFetchOrderById({ orderId: id});
 
-  if(isLoading) return <LoadingSpinner/>
-  if(error) return <ErrorAlert message={error.message}/>
-  
-  return <OrderPage order={order}/>
+  if (isLoading) return <div><LoadingSpinner/></div>;
+    if (error) return <div><ErrorAlert/></div>;
+
+    return (
+      <div>
+        { order ? (
+          <OrderPage order={ order } />
+        ): (
+          <div>No orders available.</div>  
+        )}
+      </div>
+    )
+
 }
 
 export default OrderDetailsPage

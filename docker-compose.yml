@@ -1,0 +1,14 @@
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true

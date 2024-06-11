@@ -136,6 +136,41 @@ export interface OrderCompletionResponse {
   shipping: OrderShipping;
 }
 
+export interface OrderResponse{
+  id: string;
+  user: {
+    id:string;
+    name:string;
+    email:string;
+  }
+  items: [
+    {
+      id: string;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+  };
+  quantity: number;
+  subtotal: number;
+    }
+  ];
+  totalPrice: number;
+  status: string;
+  orderDate: string;
+  shipping: {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  postalCode: number | string;
+  phone: string;
+  method: string;
+  cost: number;
+  }
+
+}
+
 export interface NotificationPreferences {
   emailNotifications: boolean;
   pushNotifications: boolean;

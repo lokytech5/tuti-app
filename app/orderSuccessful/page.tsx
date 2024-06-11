@@ -1,12 +1,12 @@
 "use client"
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import { OrderCompletionResponse } from '../components/types';
+import { OrderCompletionResponse, OrderResponse } from '../components/types';
 import { FaShoppingCart, FaRegCheckCircle, FaMailBulk, FaPoll } from 'react-icons/fa';
 
 
 interface Props {
-    order: OrderCompletionResponse; 
+    order: OrderResponse; 
 }
 
 const OrderSuccessfulPage = ({order}: Props) => {

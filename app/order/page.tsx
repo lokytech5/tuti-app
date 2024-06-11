@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { OrderCreationResponse } from '../components/types';
+import { OrderCreationResponse, OrderResponse } from '../components/types';
 import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
 import useInitializePayment from '../hooks/useInitializePayment';
 import useUserStore from '../components/useUserStore';
@@ -8,7 +8,7 @@ import { showToast } from '../components/ToastNotifier';
 import { useRouter } from 'next/navigation';
 
 interface Props {
-    order: OrderCreationResponse;
+    order: OrderResponse
 }
 
 const OrderPage = ({order}: Props) => { 
@@ -44,20 +44,8 @@ const OrderPage = ({order}: Props) => {
         });
     }
 
-    //  const getStatusBadge = () => {
-    //     switch (order.status) {
-    //         case 'pending':
-    //             return <span className="badge badge-warning">Pending</span>;
-    //         case 'completed':
-    //             return <span className="badge badge-success">Completed</span>;
-    //         case 'error':
-    //             return <span className="badge badge-error">Error</span>;
-    //         default:
-    //             return <span className="badge badge-info">Info</span>;
-    //     }
-    // };
-
   return (
+
     <div className='container mx-auto p-4 text-secondary-content'>
             <h1 className="text-4xl font-bold text-center my-6">Order Summary</h1>
 

@@ -1,10 +1,9 @@
-"use client"
-/* eslint-disable */
+
 import React from 'react'
 import OrderSuccessfulPage from '../page'
-import useFetchOrder from '@/app/hooks/useFetchOrder';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
 import ErrorAlert from '@/app/components/ErrorAlert';
+import useFetchOrderById from '@/app/hooks/useFetchOrderById';
 
 interface Props {
     params: { orderId: string}
@@ -12,12 +11,20 @@ interface Props {
 
 const OrderSuccessfulDetailPage = ({ params: {orderId}}: Props) => {
 
-    const { data: order, isLoading, isError, error } = useFetchOrder({ orderId });
+  const id: string | undefined = orderId as string;
 
-    if(isLoading) return <LoadingSpinner/>
-    if(error) return <ErrorAlert message={error.message}/>
+  const { data: order, isLoading, error } =  useFetchOrderById({ orderId: id});
+
+  if (isLoading) return <div><LoadingSpinner/></div>;
+    if (error) return <div><ErrorAlert/></div>;
     
-  return <OrderSuccessfulPage order={order}/>
+    <div>
+    { order ? (
+      <OrderSuccessfulPage order={ order } />
+    ): (
+      <div>No orders available.</div>  
+    )}
+  </div>
 }
 
 export default OrderSuccessfulDetailPage
