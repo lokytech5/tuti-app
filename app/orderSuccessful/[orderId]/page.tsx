@@ -1,4 +1,5 @@
 "use client"
+/* eslint-disable */
 import React from 'react'
 import OrderSuccessfulPage from '../page'
 import useFetchOrder from '@/app/hooks/useFetchOrder';

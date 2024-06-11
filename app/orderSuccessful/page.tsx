@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { OrderCompletionResponse } from '../components/types';
@@ -10,6 +11,11 @@ interface Props {
 
 const OrderSuccessfulPage = ({order}: Props) => {
     const customerSupportEmail = 'adaonwuegbuzie@gmail.com';
+
+    if(!order){
+        return <div>Loading ...</div>
+    }
+   
     
     return (
         <div className="container mx-auto p-4 text-secondary-content">

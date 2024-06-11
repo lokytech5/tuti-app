@@ -18,6 +18,10 @@ const OrderPage = ({order}: Props) => {
     const userEmail = user?.email || '';
     const router = useRouter();
 
+    if(!order){
+        return <div>Loading ...</div>
+    }
+
     const handlePayment = () => {
         setIsButtonLoading(true);
 

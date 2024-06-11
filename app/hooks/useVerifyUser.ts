@@ -9,7 +9,6 @@ interface VerifyErrorResponse {
     error?: string;
 }
 
-
 const useVerifyUser = () => {
     const setUserVerified = useUserStore((state) => state.setIsVerified);
     const setError = useUserStore((state) => state.setError);
@@ -21,7 +20,6 @@ const useVerifyUser = () => {
         },
         {
             onSuccess: (data) => {
-                // You might want to set the user as verified in your global state here
                 setUserVerified(true);
                 console.log('Email verification successful:', data.message);
             },
@@ -32,8 +30,6 @@ const useVerifyUser = () => {
             },
         }
     );
-
-    
 };
 
-export default useVerifyUser
+export default useVerifyUser;
