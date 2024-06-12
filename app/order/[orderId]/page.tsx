@@ -1,12 +1,12 @@
-
+"use client"
 import ErrorAlert from '@/app/components/ErrorAlert';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
-import useFetchOrderById from '@/app/hooks/useFetchOrderById';
 import React from 'react'
 import OrderPage from '../page';
+import useFetchOrderById from '@/app/hooks/useFetchOrderById';
 
 
-interface Props {
+export interface Props {
   params: { orderId: string}
 }
 

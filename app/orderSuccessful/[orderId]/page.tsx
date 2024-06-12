@@ -1,4 +1,4 @@
-
+"use client"
 import React from 'react'
 import OrderSuccessfulPage from '../page'
 import LoadingSpinner from '@/app/components/LoadingSpinner';
@@ -11,20 +11,12 @@ interface Props {
 
 const OrderSuccessfulDetailPage = ({ params: {orderId}}: Props) => {
 
-  const id: string | undefined = orderId as string;
+    const { data: order, isLoading, isError, error } = useFetchOrderById({ orderId });
 
-  const { data: order, isLoading, error } =  useFetchOrderById({ orderId: id});
-
-  if (isLoading) return <div><LoadingSpinner/></div>;
-    if (error) return <div><ErrorAlert/></div>;
+    if(isLoading) return <LoadingSpinner/>
+    if(error) return <ErrorAlert message={error.message}/>
     
-    <div>
-    { order ? (
-      <OrderSuccessfulPage order={ order } />
-    ): (
-      <div>No orders available.</div>  
-    )}
-  </div>
+  return <OrderSuccessfulPage order={order}/>
 }
 
 export default OrderSuccessfulDetailPage

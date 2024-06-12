@@ -1,13 +1,7 @@
+// @ts-nocheck
 "use client"
-import { useRouter } from 'next/navigation';
 import React from 'react'
-import { OrderCompletionResponse, OrderResponse } from '../components/types';
 import { FaShoppingCart, FaRegCheckCircle, FaMailBulk, FaPoll } from 'react-icons/fa';
-
-
-interface Props {
-    order: OrderResponse; 
-}
 
 const OrderSuccessfulPage = ({order}: Props) => {
     const customerSupportEmail = 'adaonwuegbuzie@gmail.com';

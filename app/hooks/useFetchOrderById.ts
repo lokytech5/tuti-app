@@ -1,24 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
-import { OrderResponse } from "../components/types";
-import { AxiosError } from "axios";
-import { authApiClient } from "../components/services/api-client";
 
+import { useQuery } from '@tanstack/react-query';
+import React from 'react'
+import { authApiClient } from '../components/services/api-client';
+import { OrderCreationResponse } from '../components/types';
 
 interface Props {
-    orderId: string | undefined;
-  }
-  
-const useFetchOrderById = ({ orderId }: Props) => {
-    return useQuery<OrderResponse, AxiosError>(
-        ['order', orderId],
-        () => authApiClient.get<OrderResponse>(`/orders/by/${orderId}`).then(res => res.data),
-        {
-            enabled: !!orderId,
-            onError: (error) => {
-                console.error('Error fetching Orders', error.message);
-            }
-        }
-    );
-};
+    orderId: string | null;
+}
 
-export default useFetchOrderById;
+const useFetchOrderById = ({orderId}: Props) => {
+    const fetchOrderDetails = (): Promise<OrderCreationResponse> => {
+        if(!orderId) {
+            return Promise.reject(new Error("Order ID is undefined."));
+    }   
+
+    return authApiClient.get<OrderCreationResponse>(`/orders/by/${orderId}`).then(res => res.data);
+}
+    return useQuery<OrderCreationResponse, Error>(['order', orderId], fetchOrderDetails);
+}
+
+export default useFetchOrderById

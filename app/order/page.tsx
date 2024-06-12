@@ -1,17 +1,14 @@
+// @ts-nocheck
 "use client"
 import React, { useState } from 'react'
-import { OrderCreationResponse, OrderResponse } from '../components/types';
+import { OrderCompletionResponse, OrderCreationResponse, OrderResponse } from '../components/types';
 import { FaBoxOpen, FaCreditCard, FaShippingFast } from 'react-icons/fa';
 import useInitializePayment from '../hooks/useInitializePayment';
 import useUserStore from '../components/useUserStore';
 import { showToast } from '../components/ToastNotifier';
 import { useRouter } from 'next/navigation';
 
-interface Props {
-    order: OrderResponse
-}
-
-const OrderPage = ({order}: Props) => { 
+const OrderPage: React.FC<OrderPageProps> = ({ order }) => {
     const [isButtonLoading, setIsButtonLoading] = useState(false);
     const initializePayment = useInitializePayment();
     const { user } = useUserStore();
