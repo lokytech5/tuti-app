@@ -2,12 +2,12 @@ import axios from "axios";
 import { config } from "process";
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8000/api'
+    baseURL: 'http://13.60.48.95:8000/api'
 });
 
 // Authenticated client
 const authApiClient = axios.create({
-    baseURL: 'http://localhost:8000/api'
+    baseURL: 'http://13.60.48.95:8000/api'
 });
 
 authApiClient.interceptors.request.use((config) => {
