@@ -2,12 +2,12 @@ import axios from "axios";
 import { config } from "process";
 
 const apiClient = axios.create({
-   baseURL: 'https://api.lokytech.co/api'
+   baseURL: 'https://app.lokytech.co/api'
 });
 
 // Authenticated client
 const authApiClient = axios.create({
-    baseURL: 'https://api.lokytech.co/api'
+    baseURL: 'https://app.lokytech.co/api'
 });
 
 authApiClient.interceptors.request.use((config) => {
