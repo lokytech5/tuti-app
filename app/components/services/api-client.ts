@@ -2,12 +2,12 @@ import axios from "axios";
 import { config } from "process";
 
 const apiClient = axios.create({
-   baseURL: 'https://app.lokytech.co/api'
+   baseURL: 'https://tuti.plugfolio.cloud/api'
 });
 
 // Authenticated client
 const authApiClient = axios.create({
-    baseURL: 'https://app.lokytech.co/api'
+    baseURL: 'https://tuti.plugfolio.cloud/api'
 });
 
 authApiClient.interceptors.request.use((config) => {
