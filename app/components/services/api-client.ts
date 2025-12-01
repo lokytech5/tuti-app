@@ -1,13 +1,17 @@
 import axios from "axios";
 import { config } from "process";
 
+const url = "http://localhost:8000/api"
+
+// const oldUrl = 'https://tuti.plugfolio.cloud/api'
+
 const apiClient = axios.create({
-   baseURL: 'https://tuti.plugfolio.cloud/api'
+   baseURL: url
 });
 
 // Authenticated client
 const authApiClient = axios.create({
-    baseURL: 'https://tuti.plugfolio.cloud/api'
+    baseURL: url
 });
 
 authApiClient.interceptors.request.use((config) => {
